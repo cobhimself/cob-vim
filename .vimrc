@@ -39,7 +39,7 @@
         set pastetoggle=<F12>          	" pastetoggle (sane indentation on pastes)
     " }
 	set background=dark             " Assume a dark background
-	"set term=builtin_gui          " Make arrow and other keys work
+    set vb t_vb=""		            " I don't care about bells
     set virtualedit=all             " Turn virtual edit on
     set hidden                      " Don't need to save files to hide them
     set lazyredraw                  " Don't update the display while executing macros
