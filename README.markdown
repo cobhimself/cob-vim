@@ -13,8 +13,6 @@ It also works well on Windows, Linux and OSX without even modifying directories.
 
 The structure of this vimrc file is based heavily on spf13's [vimrc](http://github.com/spf13/).
 
-It fixes many of the inconveniences of vanilla vim including
-
 ## Installation
 
     git clone git://github.com/cobhimself/cob-vim.git
