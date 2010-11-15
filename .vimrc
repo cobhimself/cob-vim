@@ -23,18 +23,6 @@
 "     }
 " }
 
-" Startup Settings {
-    " Auto Full Screen Mode
-    if has("gui_running")
-        set fuoptions=maxvert,maxhorz
-        au GUIEnter * set fullscreen
-    endif
-
-    "Load NERDTree on startup
-    autocmd VimEnter * NERDTree
-    autocmd VimEnter * wincmd p
-" }
-
 " General Options {
 "
 	filetype plugin indent on  	    " Automatically detect file types.
@@ -51,7 +39,7 @@
         set pastetoggle=<F12>          	" pastetoggle (sane indentation on pastes)
     " }
 	set background=dark             " Assume a dark background
-	set term=builtin_ansi           " Make arrow and other keys work
+	"set term=builtin_gui          " Make arrow and other keys work
     set virtualedit=all             " Turn virtual edit on
     set hidden                      " Don't need to save files to hide them
     set lazyredraw                  " Don't update the display while executing macros
@@ -250,6 +238,95 @@
 	cmap w!! w !sudo tee % >/dev/null
 " }
 
+" Plugins {
+
+	" PIV {
+		let g:DisableAutoPHPFolding = 0
+	" }
+	
+	" Supertab {
+		"let g:SuperTabDefaultCompletionType = "context"
+		let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
+	" }
+
+	" Misc { 
+		let g:checksyntax_auto = 0
+
+		"comment out line(s) in visual mode
+		vmap  o  :call NERDComment(1, 'toggle')<CR>
+		let g:NERDShutUp=1
+
+		let b:match_ignorecase = 1
+	" }
+
+	" ShowMarks {
+		let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+		" Don't leave on by default, use :ShowMarksOn to enable
+		let g:showmarks_enable = 0
+		" For marks a-z
+		highlight ShowMarksHLl gui=bold guibg=LightBlue guifg=Blue
+		" For marks A-Z
+		highlight ShowMarksHLu gui=bold guibg=LightRed guifg=DarkRed
+		" For all other marks
+		highlight ShowMarksHLo gui=bold guibg=LightYellow guifg=DarkYellow
+		" For multiple marks on the same line.
+		highlight ShowMarksHLm gui=bold guibg=LightGreen guifg=DarkGreen
+	" }
+	
+	" OmniComplete {
+        if has("autocmd") && exists("+omnifunc")
+            autocmd Filetype *
+                \if &omnifunc == "" |
+                \setlocal omnifunc=syntaxcomplete#Complete |
+                \endif
+        endif
+
+		" Popup menu hightLight Group
+		"highlight Pmenu 	ctermbg=13 	guibg=DarkBlue
+		highlight PmenuSel 	ctermbg=7 	guibg=DarkBlue 		guifg=LightBlue
+		"highlight PmenuSbar ctermbg=7 	guibg=DarkGray
+		"highlight PmenuThumb 			guibg=Black
+
+		hi Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
+		hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
+		hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
+
+		" some convenient mappings 
+		inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
+		inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+		inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+		inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+		inoremap <expr> <C-d> 	   pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
+		inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
+
+		" automatically open and close the popup menu / preview window
+		au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+		set completeopt=menu,longest,preview
+	" }
+	
+	" Ctags {
+		set tags=./tags;/,~/.vimtags
+	" }
+
+	" Delimitmate {
+		au FileType * let b:delimitMate_autoclose = 1
+
+		" If using html auto complete (complete closing tag)
+        au FileType xml,html,xhtml let b:delimitMate_matchpairs = "(:),[:],{:}"
+	" }
+	
+	" AutoCloseTag {
+		" Make it so AutoCloseTag works for xml and xhtml files as well
+		au FileType xhtml,xml ru ftplugin/html/autoclosetag.vim
+	" }
+
+	" SnipMate {
+		" Setting the author var
+		let g:snips_author = 'Steve Francia <steve.francia@gmail.com>'
+		" Shortcut for reloading snippets, useful when developing
+		nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
+	" }
+" }
 " Custom Functions {
 "
     " Setup easy jsdoc generation (WORK IN PROGRESS)
@@ -265,4 +342,16 @@
 
     "command! -nargs=* JsdocP :call COB_jsdoc(<f-args>)
     " nmap ,doc :!~/Dropbox/Applications/jsdoc-toolkit/jsrun.sh %
+" }
+
+" Startup Settings {
+    " Auto Full Screen Mode
+    if has("gui_running")
+        set fuoptions=maxvert,maxhorz
+        au GUIEnter * set fullscreen
+    endif
+
+    "Load NERDTree on startup
+    autocmd VimEnter * NERDTree
+    autocmd VimEnter * wincmd p
 " }
