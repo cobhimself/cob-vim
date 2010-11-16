@@ -31,3 +31,6 @@
 [submodule "bundle/showmarks"]
 	path = bundle/showmarks
 	url = git://github.com/vim-scripts/ShowMarks.git
+[submodule "bundle/vim-surround"]
+	path = bundle/vim-surround
+	url = git://github.com/tpope/vim-surround.git
