@@ -1,5 +1,5 @@
 " Notes {
-" vim: set foldmarker={,} foldlevel=0 foldmethod=marker
+" vim: set foldmarker={,} foldlevel=1 foldmethod=marker
 "   This is the personal .vimrc file of Collin D. Brooks.
 " }
 
@@ -19,7 +19,8 @@
 "
 "     Bundle Support {
 		runtime! autoload/pathogen.vim
-		silent! call pathogen#runtime_append_all_bundles()
+		call pathogen#runtime_append_all_bundles()
+		call pathogen#helptags()
 "     }
 " }
 
@@ -56,7 +57,6 @@
 	set autowrite                   " automatically write a file when leaving a modified buffer
 	set shortmess+=filmnrxoOtT     	" abbrev. of messages (avoids 'hit enter')
 	set viewoptions=folds,options,cursor,unix,slash " better unix / windows compatibility
-	set virtualedit=onemore 	   	" allow for cursor beyond last character
 	set history=1000  				" Store a ton of history (default is 20)
 	set spell 		 	        	" spell checking on
     
@@ -79,7 +79,7 @@
         set guicursor+=r-cr:hor20-Cursor
         set guicursor+=sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
 
-        color mustang2     	       		" load a colorscheme
+        color cob     	       		    " load a colorscheme
         set tabpagemax=15 				" only show 15 tabs
         set showmode                   	" display the current mode
 
@@ -263,14 +263,7 @@
 		let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 		" Don't leave on by default, use :ShowMarksOn to enable
 		let g:showmarks_enable = 0
-		" For marks a-z
-		highlight ShowMarksHLl gui=bold guibg=LightBlue guifg=Blue
-		" For marks A-Z
-		highlight ShowMarksHLu gui=bold guibg=LightRed guifg=DarkRed
-		" For all other marks
-		highlight ShowMarksHLo gui=bold guibg=LightYellow guifg=DarkYellow
-		" For multiple marks on the same line.
-		highlight ShowMarksHLm gui=bold guibg=LightGreen guifg=DarkGreen
+        map <silent> <F2> :ShowMarksToggle<CR>
 	" }
 	
 	" OmniComplete {
@@ -308,13 +301,6 @@
 		set tags=./tags;/,~/.vimtags
 	" }
 
-	" Delimitmate {
-		au FileType * let b:delimitMate_autoclose = 1
-
-		" If using html auto complete (complete closing tag)
-        au FileType xml,html,xhtml let b:delimitMate_matchpairs = "(:),[:],{:}"
-	" }
-	
 	" AutoCloseTag {
 		" Make it so AutoCloseTag works for xml and xhtml files as well
 		au FileType xhtml,xml ru ftplugin/html/autoclosetag.vim
@@ -322,11 +308,12 @@
 
 	" SnipMate {
 		" Setting the author var
-		let g:snips_author = 'Steve Francia <steve.francia@gmail.com>'
+		let g:snips_author = 'Collin D. Brooks <collin.brooks@gmail.com>'
 		" Shortcut for reloading snippets, useful when developing
 		nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
 	" }
 " }
+
 " Custom Functions {
 "
     " Setup easy jsdoc generation (WORK IN PROGRESS)

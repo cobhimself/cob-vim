@@ -1,4 +1,4 @@
-" Maintainer:	Henrique C. Alves (hcarvalhoalves@gmail.com)
+" Maintainer:	Collin D. Brooks <collin.brooks@gmail.com>
 " Version:      1.0
 " Last Change:	September 25 2008
 
@@ -10,7 +10,7 @@ if exists("syntax_on")
   syntax reset
 endif
 
-let colors_name = "mustang2"
+let colors_name = "cob"
 
 " Vim >= 7.0 specific colors
 if version >= 700
@@ -55,3 +55,15 @@ hi pythonOperator guifg=#7e8aa2 gui=none ctermfg=103
 
 hi Search     guifg=white	guibg=NONE	cterm=NONE	gui=underline
 
+" Set colors for different plugins
+"
+" ShowMarks
+
+" For marks a-z
+highlight ShowMarksHLl guifg=#000000 guibg=#ff9800 gui=bold 
+" For marks A-Z
+highlight ShowMarksHLu gui=bold guifg=#ff9800 guibg=#000000
+" For all other marks
+highlight ShowMarksHLo gui=bold guibg=LightYellow guifg=DarkYellow
+" For multiple marks on the same line.
+highlight ShowMarksHLm gui=bold guibg=LightGreen guifg=DarkGreen
