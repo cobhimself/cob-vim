@@ -1,7 +1,4 @@
-" Notes {
-" vim: set foldmarker={,} foldlevel=1 foldmethod=marker
-"   This is the personal .vimrc file of Collin D. Brooks.
-" }
+" vim: set foldmarker={,} foldlevel=1 foldmethod=marker modelines=4
 
 " Environment {
 "     General {
@@ -136,6 +133,7 @@
 
 " }
 
+
 " Key Mappings {
 "
     " Turn off highlight search
@@ -240,6 +238,16 @@
 
 " Plugins {
 
+    " NERDTree {
+        let NERDTreeShowBookmarks = 1
+		let g:NERDShutUp=1
+    " }
+
+    " NERDComment {
+		"comment out line(s) in visual mode
+		vmap  o  :call NERDComment(1, 'toggle')<CR>
+    " }
+
 	" PIV {
 		let g:DisableAutoPHPFolding = 0
 	" }
@@ -251,11 +259,6 @@
 
 	" Misc { 
 		let g:checksyntax_auto = 0
-
-		"comment out line(s) in visual mode
-		vmap  o  :call NERDComment(1, 'toggle')<CR>
-		let g:NERDShutUp=1
-
 		let b:match_ignorecase = 1
 	" }
 
