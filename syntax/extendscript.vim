@@ -23,7 +23,7 @@ if version < 600    " Don't support the old version
 	unlet! b:extendscript_fold
 endif
 
-"" dollar sigh is permittd anywhere in an identifier
+"" dollar sign is permittd anywhere in an identifier
 setlocal iskeyword+=$
 
 syntax sync fromstart
