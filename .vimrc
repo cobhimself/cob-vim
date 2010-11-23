@@ -133,7 +133,6 @@
 
 " }
 
-
 " Key Mappings {
 "
     " Turn off highlight search
@@ -226,9 +225,6 @@
          \ . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")
          \ . ">"<CR>
 
-    " Enter key adds line after current line and moves back to normal mode
-    nmap <silent> <CR> o<Esc>k
-    
 	" Change Working Directory to that of the current file
     cmap cwd lcd %:p:h
 
@@ -253,8 +249,8 @@
 	" }
 	
 	" Supertab {
-		"let g:SuperTabDefaultCompletionType = "context"
-		let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
+		let g:SuperTabDefaultCompletionType = "context"
+        "let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 	" }
 
 	" Misc { 
@@ -315,6 +311,13 @@
 		" Shortcut for reloading snippets, useful when developing
 		nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
 	" }
+
+    " taglist {
+        nnoremap <silent> <F3> :TlistToggle<CR>
+
+        "Let taglist handle extendscript files as javascript
+        let tlist_extendscript_settings= 'JavaScript;c:Classes;m:Methods;p:Properties;f:Functions;v:Variables'
+    " }
 " }
 
 " Custom Functions {
