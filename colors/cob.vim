@@ -52,7 +52,9 @@ hi Todo         guifg=#000000 guibg=#e6ea50 gui=italic
 
 " Code-specific colors
 hi pythonOperator guifg=#7e8aa2 gui=none ctermfg=103
-
+hi ExtendScriptNamespace guifg=#b1d631 gui=bold ctermfg=148  
+hi ExtendScriptThisObject guifg=#b1d631 gui=bold,italic ctermfg=148  
+hi ExtendScriptMethodOrField guifg=#ff5500 gui=none ctermfg=103
 hi Search     guifg=white	guibg=NONE	cterm=NONE	gui=underline
 
 " Set colors for different plugins
