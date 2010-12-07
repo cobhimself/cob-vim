@@ -15,18 +15,18 @@ let g:loaded_markdownMaker = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
+fun! <SID>MakeHeader()
+   normal "0Vyp:s/./=/g"
+endfun
+
 " Setup the mapping
-if !hasmapto('<Plug>markdownMaker')
-  imap <buffer> <unique> <Leader>h <Plug>markdownMaker<SID>MakeHeader
+if !hasmapto('<Plug>MarkdownmakerMakeHeader')
+  echo "No mapping"
+  map <buffer> <unique> <c-h> <Plug>MarkdownmakerMakeHeader
 endif
-noremap <buffer> <unique> <c-h> <Plug>markdownMaker <SID>MakeHeader 
+noremap <buffer> <unique> <script> <Plug>MarkdownmakerMakeHeader <SID>MakeHeader
 
-
-function! s:MakeHeader()
-   <Esc>0Vyp:s/./=/g 
-endfunction
-
-noremap <SID>markdownMaker :call <SID>markdownMaker()<CR>
+noremap <SID>MakeHeader :call <SID>MakeHeader()<CR>
 
 " Reset the user's cpo settings
 let &cpo = s:save_cpo
