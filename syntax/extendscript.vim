@@ -1,9 +1,9 @@
 " Vim syntax file
-" Language:     JavaScript
-" Maintainer:   Yi Zhao (ZHAOYI) <zzlinux AT hotmail DOT com>
-" Last Change:  June 4, 2009
-" Version:      0.7.7
-" Changes:      Add "undefined" as a type keyword
+" Language:     ExtendScript
+" Maintainer:   Collin Brooks <collin.brooks AT gmail DOT com>
+" Last Change:  December 05, 2010
+" Version:      0.1
+" Changes:      Initial Upload
 "
 " TODO:
 "  - Add the HTML syntax inside the JSDoc
@@ -28,12 +28,21 @@ setlocal iskeyword+=$
 
 syntax sync fromstart
 
+syntax match extendScriptDotNotation      "\." nextgroup=extendScriptPrototype,extendScriptMethodOrField,extendScriptBracket,extendScriptParenBlock
+
+"" ExtendScript Method/Field
+syntax match   extendScriptMethodOrField  /\.\h\w\{-}[\.[:blank:]\)\(\[;]/hs=s+1,he=e-1,me=e-1 nextgroup=extendScriptMethodOrField,
+
+"" Namespace or Object
+syntax match   extendScriptNamespace      /\h\w\{-}\./he=e-1,me=e-1 contains=extendScriptDotNotation nextgroup=extendScriptMethodOrField
+
+
 "" JavaScript comments
 syntax keyword extendScriptCommentTodo    TODO FIXME XXX TBD contained
-syntax region  extendScriptLineComment    start=+\/\/+ end=+$+ keepend contains=extendScriptCommentTodo,@Spell
-syntax region  extendScriptLineComment    start=+^\s*\/\/+ skip=+\n\s*\/\/+ end=+$+ keepend contains=extendScriptCommentTodo,@Spell fold
+syntax region  extendScriptLineComment    start=+\/\/+ end=+$+ keepend contains=extendScriptCommentTodo
+syntax region  extendScriptLineComment    start=+^\s*\/\/+ skip=+\n\s*\/\/+ end=+$+ keepend contains=extendScriptCommentTodo fold
 syntax region  extendScriptCvsTag         start="\$\cid:" end="\$" oneline contained
-syntax region  extendScriptComment        start="/\*"  end="\*/" contains=extendScriptCommentTodo,extendScriptCvsTag,@Spell fold
+syntax region  extendScriptComment        start="/\*"  end="\*/" contains=extendScriptCommentTodo,extendScriptCvsTag fold
 
 "" JSDoc support start
 if !exists("extendscript_ignore_extendscriptdoc")
@@ -43,7 +52,7 @@ if !exists("extendscript_ignore_extendscriptdoc")
 	syntax include @javaHtml $VIMRUNTIME/syntax/html.vim
 	unlet b:current_syntax
 
-	syntax region extendScriptDocComment    matchgroup=extendScriptComment start="/\*\*\s*$"  end="\*/" contains=extendScriptDocTags,extendScriptCommentTodo,extendScriptCvsTag,@Spell fold
+	syntax region extendScriptDocComment    matchgroup=extendScriptComment start="/\*\*\s*$"  end="\*/" contains=extendScriptDocTags,extendScriptCommentTodo,extendScriptCvsTag fold
 	syntax match  extendScriptDocTags       contained "@\(param\|argument\|requires\|exception\|throws\|type\|class\|extends\|see\|example\|lends\|exports\|link\|memberOf\|member\|module\|method\|title\|namespace\|optional\|default\|base\|constant\|field\|function\|file\)\>" nextgroup=extendScriptDocParam,extendScriptDocSeeTag skipwhite
 	syntax match  extendScriptDocTags       contained "@\(beta\|deprecated\|description\|fileOverview\|author\|license\|version\|returns\=\|constructor\|private\|protected\|final\|ignore\|addon\|exec\)\>"
 	syntax match  extendScriptDocParam      contained "\%(#\|\w\|\.\|:\|\/\)\+"
@@ -53,7 +62,7 @@ endif   "" JSDoc end
 
 syntax case match
 
-"" Syntax in the JavaScript code
+"" Syntax in the ExtendScript code
 syntax match   extendScriptSpecial        "\\\d\d\d\|\\x\x\{2\}\|\\u\x\{4\}\|\\."
 syntax region  extendScriptStringD        start=+"+  skip=+\\\\\|\\$"+  end=+"+  contains=extendScriptSpecial
 syntax region  extendScriptStringS        start=+'+  skip=+\\\\\|\\$'+  end=+'+  contains=extendScriptSpecial
@@ -62,18 +71,16 @@ syntax match   extendScriptNumber         /\<-\=\d\+L\=\>\|\<0[xX]\x\+\>/
 syntax match   extendScriptFloat          /\<-\=\%(\d\+\.\d\+\|\d\+\.\|\.\d\+\)\%([eE][+-]\=\d\+\)\=\>/
 syntax match   extendScriptLabel          /\(?\s*\)\@<!\<\w\+\(\s*:\)\@=/
 
-""" ExtendScript Method/Field
-"syntax match extendScriptMethodOrField    /\.\h\w*\[\.\s=-+,\/\*]/
-
 
 "" JavaScript Prototype
 syntax keyword extendScriptPrototype      prototype
 
-
-"" Programm Keywords
+"" Program Keywords
 syntax keyword extendScriptSource         import export
-syntax keyword extendScriptType           const this undefined var void yield 
-syntax keyword extendScriptOperator       delete new in instanceof let typeof
+syntax keyword extendScriptThis           this nextgroup=extendScriptMethodOrField
+syntax keyword extendScriptType           const undefined var void yield 
+
+syntax keyword extendScriptOperator       delete new in instanceof let typeof 
 syntax keyword extendScriptBoolean        true false
 syntax keyword extendScriptNull           null
 
@@ -91,25 +98,27 @@ syntax keyword extendScriptFutureKeys     abstract enum int short boolean export
 
 syntax keyword extendScriptGlobalObjects  ScriptUI Window LayoutManager ScriptUIGraphics ScriptUIPen ScriptUIBrush ScriptUIPath ScriptUIFont ScriptUIImage DrawState StaticText Button IconButton EditText ListBox DropDownList ListItem Checkbox Scrollbar RadioButton Slider Progressbar TreeView FlashPlayer Group Panel Point Dimension Bounds UIEvent
 
-"" Namespace or Object
-syntax match   extendScriptNamespace  /\s\h\w\./he=e-1
-
-syntax match extendScriptDotNotation      "\." nextgroup=extendScriptPrototype,
+"" highlight opperators
+syn match   extendScriptOperatorSymbols	"\(==\|!=\|>=\|<=\|=\~\|!\~\|>\|<\|=\)[?#]\{0,2}" skipwhite nextgroup=extendScriptMethodOrField
+syn match   extendScriptOperatorSymbols	"||\|&&\|[-+.]"	skipwhite
 
 "" Code blocks
-syntax cluster extendScriptAll       contains=extendScriptNamespace,extendScriptComment,extendScriptLineComment,extendScriptDocComment,extendScriptStringD,extendScriptStringS,extendScriptRegexpString,extendScriptNumber,extendScriptFloat,extendScriptLabel,extendScriptSource,extendScriptType,extendScriptOperator,extendScriptBoolean,extendScriptNull,extendScriptFunction,extendScriptConditional,extendScriptRepeat,extendScriptBranch,extendScriptStatement,extendScriptGlobalObjects,extendScriptExceptions,extendScriptFutureKeys,extendScriptDotNotation
-syntax region  extendScriptBracket   matchgroup=extendScriptBracket transparent start="\[" end="\]" contains=@extendScriptAll,extendScriptParensErrB,extendScriptParensErrC,extendScriptBracket,extendScriptParen,extendScriptBlock
-syntax region  extendScriptParen     matchgroup=extendScriptParen   transparent start="("  end=")"  contains=@extendScriptAll,extendScriptParensErrA,extendScriptParensErrC,extendScriptParen,extendScriptBracket,extendScriptBlock
+syntax cluster extendScriptAll       contains=extendScriptOperatorSymbols,extendScriptNamespace,extendScriptMethodOrField,extendScriptComment,extendScriptLineComment,extendScriptDocComment,extendScriptStringD,extendScriptStringS,extendScriptRegexpString,extendScriptNumber,extendScriptFloat,extendScriptLabel,extendScriptSource,extendScriptType,extendScriptThis,extendScriptOperator,extendScriptBoolean,extendScriptNull,extendScriptFunction,extendScriptConditional,extendScriptRepeat,extendScriptBranch,extendScriptStatement,extendScriptGlobalObjects,extendScriptExceptions,extendScriptFutureKeys,extendScriptDotNotation
+syntax region  extendScriptBracket   matchgroup=extendScriptBracket transparent start="\[" end="\]" contains=@extendScriptAll,extendScriptParensErrB,extendScriptParensErrC,extendScriptBracket,extendScriptParen,extendScriptBlock,
+syntax region  extendScriptParen     matchgroup=extendScriptParen   transparent start="("  end=")"  contains=@extendScriptAll,extendScriptParensErrA,extendScriptParensErrC,extendScriptParen,extendScriptBracket,extendScriptBlock nextgroup=extendScriptMethodOrField
 syntax region  extendScriptBlock     matchgroup=extendScriptBlock   transparent start="{"  end="}"  contains=@extendScriptAll,extendScriptParensErrA,extendScriptParensErrB,extendScriptParen,extendScriptBracket,extendScriptBlock
-
-"" highlight opperators
-syntax match   extendScriptOperatorSymbols ".\|-\|}\|{\|]\|||\|\[" contained 
 
 "" catch errors caused by wrong parenthesis
 syntax match   extendScriptParensError    ")\|}\|\]"
 syntax match   extendScriptParensErrA     contained "\]"
 syntax match   extendScriptParensErrB     contained ")"
 syntax match   extendScriptParensErrC     contained "}"
+
+" Define the htmlJavaScript for HTML syntax html.vim
+"syntax clear htmlJavaScript
+"syntax clear extendScriptExpression
+syntax cluster  htmlJavaScript contains=@extendScriptAll,extendScriptBracket,extendScriptParen,extendScriptBlock,extendScriptParenError
+syntax cluster  extendScriptExpression contains=@extendScriptAll,extendScriptBracket,extendScriptParen,extendScriptBlock,extendScriptParenError
 
 if main_syntax == "extendscript"
 	syntax sync clear
@@ -167,15 +176,18 @@ if version >= 508 || !exists("did_extendscript_syn_inits")
 	HiLink extendScriptStatement            Statement
 	HiLink extendScriptFunction             Function
 	HiLink extendScriptError                Error
+""	HiLink extendScriptParen                Operator
 	HiLink extendScriptParensError          Error
 	HiLink extendScriptParensErrA           Error
 	HiLink extendScriptParensErrB           Error
 	HiLink extendScriptParensErrC           Error
 	HiLink extendScriptOperator             Operator
 	HiLink extendScriptOperatorSymbols      Type
-	HiLink extendScriptDotNotation          Operator
-	HiLink extendScriptNamespace            Type term=bold
+	HiLink extendScriptDotNotation          Ignore
+	HiLink extendScriptNamespace            Type
+    HiLink extendScriptMethodOrField        ExtendScriptMethodOrField
 	HiLink extendScriptType                 Type
+    HiLink extendScriptThis                 ExtendScriptThisObject
 	HiLink extendScriptNull                 Type
 	HiLink extendScriptNumber               Number
 	HiLink extendScriptFloat                Number
@@ -189,11 +201,6 @@ if version >= 508 || !exists("did_extendscript_syn_inits")
 	delcommand HiLink
 endif
 
-" Define the htmlJavaScript for HTML syntax html.vim
-"syntax clear htmlJavaScript
-"syntax clear extendScriptExpression
-syntax cluster  htmlJavaScript contains=@extendScriptAll,extendScriptBracket,extendScriptParen,extendScriptBlock,extendScriptParenError
-syntax cluster  extendScriptExpression contains=@extendScriptAll,extendScriptBracket,extendScriptParen,extendScriptBlock,extendScriptParenError
 
 let b:current_syntax = "extendscript"
 if main_syntax == 'extendscript'
