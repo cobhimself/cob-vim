@@ -41,7 +41,7 @@
     set virtualedit=all             " Turn virtual edit on
     set hidden                      " Don't need to save files to hide them
     set lazyredraw                  " Don't update the display while executing macros
-    set textwidth=120               " set the text width to 120
+    set textwidth=80                " set the text width to 120
     set wrapscan                    " Wrap the scan
     set ch=2                        " Make the command line two lines high
     set laststatus=2                " Tell VIM to always put a status line in, even if there is only one window
@@ -55,7 +55,7 @@
 	set shortmess+=filmnrxoOtT     	" abbrev. of messages (avoids 'hit enter')
 	set viewoptions=folds,options,cursor,unix,slash " better unix / windows compatibility
 	set history=1000  				" Store a ton of history (default is 20)
-	set spell 		 	        	" spell checking on
+	set nospell    	 	        	" spell checking on
     
     " When the page starts to scroll, keep the cursor 8 lines from the top and 8
     " lines from the bottom
@@ -95,7 +95,9 @@
             set laststatus=1           	" show statusline only if there are > 1 windows
             " Use the commented line if fugitive isn't installed
             "set statusline=%<%f\ %=\:\b%n%y%m%r%w\ %l,%c%V\ %P " a statusline, also on steroids
-            set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+            "set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+            set statusline=%<%f\ %h%m%r%{fugitive#statusline()}[%Y,%{&ff}]\ %=[ASCII=\%03.3b]\ [HEX=\%02.2B]\ %-14.(%l,%c%V%)\ %P
+			"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
         endif
 
         set backspace=indent,eol,start 	" backspace for dummys
@@ -318,23 +320,13 @@
         "Let taglist handle extendscript files as javascript
         let tlist_extendscript_settings= 'JavaScript;c:Classes;m:Methods;p:Properties;f:Functions;v:Variables'
     " }
+
+    " jslint {
+        let g:JSLintHighlightErrorLine = 0
+    " }
 " }
 
 " Custom Functions {
-"
-    " Setup easy jsdoc generation (WORK IN PROGRESS)
-
-    "function! COB_jsdoc(appDir, templateDir, configFile)
-        "let cmd = "java -Djsdoc.dir=" . a:appdir . "-Djsdoc.template.dir=" . a:templateDir . " -jar " 
-                    "\. a:appDir . "/jsrun.jar" . a:appDir . "/app/run.js -c " . a:configFile
-        "echo cmd
-    "endfunction
-
-    "let COB_jsdocDir ="/usr/local/jsdoc-toolkit/"
-    "let COB_jsdocTemplateDir =COB_jsdocDir . "/templates/"
-
-    "command! -nargs=* JsdocP :call COB_jsdoc(<f-args>)
-    " nmap ,doc :!~/Dropbox/Applications/jsdoc-toolkit/jsrun.sh %
 " }
 
 " Startup Settings {
