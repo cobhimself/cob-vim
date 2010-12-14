@@ -33,7 +33,8 @@
         set shiftwidth=4               	" use indents of 4 spaces
         set tabstop=4 					" an indentation every four columns
         set matchpairs+=<:>             " Match, to be used with %
-        set comments=sl:/*,mb:*,elx:*/  " Auto format comment blocks
+        set comments=sr:/*,mb1:*,exr:*/,sr:/**,mb1:*,exr:*/,://  " Auto format comment blocks
+        set formatoptions=tcroql        " For automatic formatting.
         set pastetoggle=<F12>          	" pastetoggle (sane indentation on pastes)
     " }
 	set background=dark             " Assume a dark background
@@ -41,14 +42,14 @@
     set virtualedit=all             " Turn virtual edit on
     set hidden                      " Don't need to save files to hide them
     set lazyredraw                  " Don't update the display while executing macros
-    set textwidth=80                " set the text width to 120
+    set textwidth=80                " set the text width to 80
     set wrapscan                    " Wrap the scan
     set ch=2                        " Make the command line two lines high
     set laststatus=2                " Tell VIM to always put a status line in, even if there is only one window
     set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo " These commands open folds
     set synmaxcol=2048              " Syntax coloring lines that are too long is too slow
     set incsearch                   " Set incremental search
-    set smartcase                   "Set the search to scan so it ignores case when the search is all lowercase but recognizes uppercase if it's specified.                      
+    set smartcase                   " Set the search to scan so it ignores case when the search is all lowercase but recognizes uppercase if it's specified.                      
     set shellslash                  " set the forward slash to be the slash to use
     set backspace=2                 " Allow backspacing over indent, eol, and the start of an insert
 	set autowrite                   " automatically write a file when leaving a modified buffer
@@ -135,8 +136,7 @@
 
 " }
 
-" Key Mappings {
-"
+" Key Mappings { "
     " Turn off highlight search
     "nmap <silent> ,n :set invhls:set hls?<cr>
 
@@ -144,7 +144,7 @@
     "nmap <silent> ,w :set invwrap:set wrap?<cr>
 
     " Open NERD Tree
-    nmap <silent> ,nt :NERDTree<cr>
+    nmap <silent> ,nt :NERDTreeToggle<cr>
 
     " Save and reload the current file.
     nmap <silent> ,re :w <cr>:e %<cr>
@@ -183,6 +183,8 @@
     noremap <silent> <C-F10> :resize +10<CR>
     noremap <silent> <C-F11> :resize -10<CR>
     noremap <silent> <C-F12> :vertical resize +10<CR>
+    noremap <silent> ,bn :bn<CR>
+    noremap <silent> ,bp :bp<CR>
     noremap <silent> ,s8 :vertical resize 83<CR>
     noremap <silent> ,cj :wincmd j<CR>:close<CR>
     noremap <silent> ,ck :wincmd k<CR>:close<CR>
