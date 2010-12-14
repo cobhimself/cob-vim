@@ -143,8 +143,8 @@ if exists("b:extendscript_fold")
 	endif
 else
 	syntax keyword extendScriptFunction       function
-	setlocal foldmethod<
-	setlocal foldlevel<
+	setlocal foldmethod=syntax
+	setlocal foldlevel=4
 endif
 
 " Define the default highlighting.
