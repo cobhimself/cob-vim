@@ -53,8 +53,8 @@ if !exists("extendscript_ignore_extendscriptdoc")
 	unlet b:current_syntax
 
 	syntax region extendScriptDocComment    matchgroup=extendScriptComment start="/\*\*\s*$"  end="\*/" contains=extendScriptDocTags,extendScriptCommentTodo,extendScriptCvsTag fold
-	syntax match  extendScriptDocTags       contained "@\(param\|argument\|requires\|exception\|throws\|type\|class\|extends\|see\|example\|lends\|exports\|link\|memberOf\|member\|module\|method\|title\|namespace\|optional\|default\|base\|constant\|field\|function\|file\)\>" nextgroup=extendScriptDocParam,extendScriptDocSeeTag skipwhite
-	syntax match  extendScriptDocTags       contained "@\(beta\|deprecated\|description\|fileOverview\|author\|license\|version\|returns\=\|constructor\|private\|protected\|final\|ignore\|addon\|exec\)\>"
+	syntax match  extendScriptDocTags       contained "@\(param\|argument\|requires\|exception\|throws\|type\|class\|extends\|see\|example\|lends\|exports\|link\|memberOf\|member\|module\|method\|title\|name\|namespace\|optional\|default\|base\|constant\|field\|function\|file\)\>" nextgroup=extendScriptDocParam,extendScriptDocSeeTag skipwhite
+	syntax match  extendScriptDocTags       contained "@\(beta\|deprecated\|description\|fileOverview\|author\|license\|version\|returns\|return\|inner\|constructor\|private\|protected\|final\|ignore\|addon\|exec\)\>"
 	syntax match  extendScriptDocParam      contained "\%(#\|\w\|\.\|:\|\/\)\+"
 	syntax region extendScriptDocSeeTag     contained matchgroup=extendScriptDocSeeTag start="{" end="}" contains=extendScriptDocTags
 	syntax case match
@@ -71,7 +71,6 @@ syntax match   extendScriptNumber         /\<-\=\d\+L\=\>\|\<0[xX]\x\+\>/
 syntax match   extendScriptFloat          /\<-\=\%(\d\+\.\d\+\|\d\+\.\|\.\d\+\)\%([eE][+-]\=\d\+\)\=\>/
 syntax match   extendScriptLabel          /\(?\s*\)\@<!\<\w\+\(\s*:\)\@=/
 
-
 "" JavaScript Prototype
 syntax keyword extendScriptPrototype      prototype
 
@@ -79,7 +78,6 @@ syntax keyword extendScriptPrototype      prototype
 syntax keyword extendScriptSource         import export
 syntax keyword extendScriptThis           this nextgroup=extendScriptMethodOrField
 syntax keyword extendScriptType           const undefined var void yield 
-
 syntax keyword extendScriptOperator       delete new in instanceof let typeof 
 syntax keyword extendScriptBoolean        true false
 syntax keyword extendScriptNull           null
@@ -185,9 +183,9 @@ if version >= 508 || !exists("did_extendscript_syn_inits")
 	HiLink extendScriptOperatorSymbols      Type
 	HiLink extendScriptDotNotation          Ignore
 	HiLink extendScriptNamespace            Type
-    HiLink extendScriptMethodOrField        ExtendScriptMethodOrField
+    HiLink extendScriptMethodOrField        javaScriptMethodOrField
+    HiLink extendScriptThis                 javaScriptThisObject
 	HiLink extendScriptType                 Type
-    HiLink extendScriptThis                 ExtendScriptThisObject
 	HiLink extendScriptNull                 Type
 	HiLink extendScriptNumber               Number
 	HiLink extendScriptFloat                Number

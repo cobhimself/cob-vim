@@ -3,7 +3,6 @@
 " Environment {
 "     General {
         set nocompatible " MUST BE FIRST LINE!
-"
 "     }
 
 "     Windows Compatibility {
@@ -42,7 +41,7 @@
     set virtualedit=all             " Turn virtual edit on
     set hidden                      " Don't need to save files to hide them
     set lazyredraw                  " Don't update the display while executing macros
-    set textwidth=80                " set the text width to 80
+    set textwidth=79                " set the text width to 79
     set wrapscan                    " Wrap the scan
     set ch=2                        " Make the command line two lines high
     set laststatus=2                " Tell VIM to always put a status line in, even if there is only one window
@@ -67,7 +66,20 @@
     set expandtab                   " Turn tabs into spaces
     
     " GUI Options {
+
+        " Give access to the menu items within the console
+        so $VIMRUNTIME/menu.vim
+        set cpo-=<
+        set wcm=<C-Z>
+        map <C-CR> :emenu <C-Z>
+
         set mouse=a					    " automatically enable mouse usage
+
+        " Setup the general guioptions
+        set guioptions+=c               " Don't show gui popups, put them in the console.
+        set guioptions-=r               " No right hand scrollbar.
+        set guioptions-=l               " No left hand scrollbar.
+        set guioptions-=b               " No bottom hand scrollbar.
 
         " Set up the gui cursor to look nice
         set guicursor=n-v-c:block-Cursor-blinkon0
@@ -240,6 +252,8 @@
 
     " NERDTree {
         let NERDTreeShowBookmarks = 1
+        let NERDTreeChDirMode = 2       "Change the CWD when root changes
+        let NERDTreeHijackNetrw = 1     "Hijack Netrw
 		let g:NERDShutUp=1
     " }
 
@@ -325,6 +339,27 @@
 
     " jslint {
         let g:JSLintHighlightErrorLine = 0
+    " }
+
+    " latex {
+        " REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
+        "filetype plugin on
+
+        " IMPORTANT: win32 users will need to have 'shellslash' set so that latex
+        " can be called correctly.
+		if has('win32') || has('win64')
+            set shellslash
+		endif
+
+        " IMPORTANT: grep will sometimes skip displaying the file name if you
+        " search in a singe file. This will confuse Latex-Suite. Set your grep
+        " program to always generate a file-name.
+        set grepprg=grep\ -nH\ $*
+
+        " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+        " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+        " The following changes the default filetype back to 'tex':
+        let g:tex_flavor='latex'
     " }
 " }
 

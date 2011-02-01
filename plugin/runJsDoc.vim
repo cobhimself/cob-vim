@@ -36,13 +36,12 @@ set cpo&vim
 
 " ---------------------------------------------------------------------
 "  Initialization: {{{1
-let s:jsdoc_dir="/Users/collinbrooks/Dropbox/Applications/jsdoc-toolkit/"
-let s:jsdoc_template=s:jsdoc_dir . "templates/cobdoc"
+let s:jsdoc_dir="$HOME/Dropbox/Applications/jsdoc-toolkit/"
 let s:jsdoc_conf=s:jsdoc_dir . "conf/BE.conf"
 let s:jsdoc_app=s:jsdoc_dir . "app/run.js"
 
 fun! <SID>RunJsDoc(...)
-    let s:cmd = "! java -jar " . s:jsdoc_dir . "jsrun.jar " . s:jsdoc_app . " -t=" . s:jsdoc_template . " -c=" . s:jsdoc_conf
+    let s:cmd = "! java -jar " . s:jsdoc_dir . "jsrun.jar " . s:jsdoc_app . " -c=" . s:jsdoc_conf
     for c in a:000
         s:cmd .= " " . c
     endfor

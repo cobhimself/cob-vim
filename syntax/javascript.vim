@@ -28,6 +28,15 @@ setlocal iskeyword+=$
 
 syntax sync fromstart
 
+syntax match javaScriptDotNotation      "\." nextgroup=javaScriptPrototype,javaScriptMethodOrField,javaScriptBracket,javaScriptParenBlock
+
+"" ExtendScript Method/Field
+syntax match   javaScriptMethodOrField  /\.\h\w\{-}[\.[:blank:]\)\(\[;]/hs=s+1,he=e-1,me=e-1 nextgroup=javaScriptMethodOrField,
+
+"" Namespace or Object
+syntax match   javaScriptNamespace      /\h\w\{-}\./he=e-1,me=e-1 contains=javaScriptDotNotation nextgroup=javaScriptMethodOrField
+
+
 "" JavaScript comments
 syntax keyword javaScriptCommentTodo    TODO FIXME XXX TBD contained
 syntax region  javaScriptLineComment    start=+\/\/+ end=+$+ keepend contains=javaScriptCommentTodo,@Spell
@@ -44,9 +53,9 @@ if !exists("javascript_ignore_javaScriptdoc")
   "unlet b:current_syntax
 
   syntax region javaScriptDocComment    matchgroup=javaScriptComment start="/\*\*\s*$"  end="\*/" contains=javaScriptDocTags,javaScriptCommentTodo,javaScriptCvsTag,@javaScriptHtml,@Spell fold
-  syntax match  javaScriptDocTags       contained "@\(param\|argument\|requires\|exception\|throws\|type\|class\|extends\|see\|link\|member\|module\|method\|title\|namespace\|optional\|default\|base\|file\)\>" nextgroup=javaScriptDocParam,javaScriptDocSeeTag skipwhite
-  syntax match  javaScriptDocTags       contained "@\(beta\|deprecated\|description\|fileoverview\|author\|license\|version\|returns\=\|constructor\|private\|protected\|final\|ignore\|addon\|exec\)\>"
   syntax match  javaScriptDocParam      contained "\%(#\|\w\|\.\|:\|\/\)\+"
+  syntax match  javaScriptDocTags     contained "@\(param\|argument\|requires\|exception\|throws\|type\|class\|javas\|see\|example\|lends\|exports\|link\|memberOf\|member\|module\|method\|title\|name\|namespace\|optional\|default\|base\|constant\|field\|function\|file\)\>" nextgroup=javaScriptDocParam,javaScriptDocSeeTag skipwhite
+  syntax match  javaScriptDocTags     contained "@\(beta\|deprecated\|description\|fileOverview\|author\|license\|version\|returns\|return\|inner\|constructor\|private\|protected\|final\|ignore\|addon\|exec\)\>"
   syntax region javaScriptDocSeeTag     contained matchgroup=javaScriptDocSeeTag start="{" end="}" contains=javaScriptDocTags
 
   syntax case match
@@ -68,6 +77,7 @@ syntax keyword javaScriptPrototype      prototype
 
 "" Programm Keywords
 syntax keyword javaScriptSource         import export
+syntax keyword javaScriptThis           this nextgroup=javaScriptMethodOrField
 syntax keyword javaScriptType           const this undefined var void yield 
 syntax keyword javaScriptOperator       delete new in instanceof let typeof
 syntax keyword javaScriptBoolean        true false
@@ -135,7 +145,7 @@ endif "DOM/HTML/CSS
 
 
 "" Code blocks
-syntax cluster javaScriptAll       contains=javaScriptComment,javaScriptLineComment,javaScriptDocComment,javaScriptStringD,javaScriptStringS,javaScriptRegexpString,javaScriptNumber,javaScriptFloat,javaScriptLabel,javaScriptSource,javaScriptType,javaScriptOperator,javaScriptBoolean,javaScriptNull,javaScriptFunction,javaScriptConditional,javaScriptRepeat,javaScriptBranch,javaScriptStatement,javaScriptGlobalObjects,javaScriptExceptions,javaScriptFutureKeys,javaScriptDomErrNo,javaScriptDomNodeConsts,javaScriptHtmlEvents,javaScriptDotNotation
+syntax cluster javaScriptAll       contains=javaScriptNamespace,javaScriptMethodOrField,javaScriptComment,javaScriptLineComment,javaScriptDocComment,javaScriptStringD,javaScriptStringS,javaScriptRegexpString,javaScriptNumber,javaScriptFloat,javaScriptLabel,javaScriptSource,javaScriptType,javaScriptOperator,javaScriptBoolean,javaScriptNull,javaScriptFunction,javaScriptConditional,javaScriptRepeat,javaScriptBranch,javaScriptStatement,javaScriptGlobalObjects,javaScriptExceptions,javaScriptFutureKeys,javaScriptDomErrNo,javaScriptDomNodeConsts,javaScriptHtmlEvents,javaScriptDotNotation,javaScriptThis
 syntax region  javaScriptBracket   matchgroup=javaScriptBracket transparent start="\[" end="\]" contains=@javaScriptAll,javaScriptParensErrB,javaScriptParensErrC,javaScriptBracket,javaScriptParen,javaScriptBlock,@htmlPreproc
 syntax region  javaScriptParen     matchgroup=javaScriptParen   transparent start="("  end=")"  contains=@javaScriptAll,javaScriptParensErrA,javaScriptParensErrC,javaScriptParen,javaScriptBracket,javaScriptBlock,@htmlPreproc
 syntax region  javaScriptBlock     matchgroup=javaScriptBlock   transparent start="{"  end="}"  contains=@javaScriptAll,javaScriptParensErrA,javaScriptParensErrB,javaScriptParen,javaScriptBracket,javaScriptBlock,@htmlPreproc 
@@ -211,6 +221,10 @@ if version >= 508 || !exists("did_javascript_syn_inits")
   HiLink javaScriptParensErrC           Error
   HiLink javaScriptOperator             Operator
   HiLink javaScriptOperatorSymbols      Type
+  HiLink extendScriptDotNotation        Ignore
+  HiLink extendScriptNamespace          Type
+  HiLink extendScriptMethodOrField      javaScriptMethodOrField
+  HiLink extendScriptThis               javaScriptThisObject
   HiLink javaScriptType                 Type
   HiLink javaScriptNull                 Type
   HiLink javaScriptNumber               Number
