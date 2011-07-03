@@ -31,7 +31,7 @@ syntax sync fromstart
 syntax match extendScriptDotNotation      "\." nextgroup=extendScriptPrototype,extendScriptMethodOrField,extendScriptBracket,extendScriptParenBlock
 
 "" ExtendScript Method/Field
-syntax match   extendScriptMethodOrField  /\.\h\w\{-}[\.[:blank:]\)\(\[;]/hs=s+1,he=e-1,me=e-1 nextgroup=extendScriptMethodOrField,
+syntax match   extendScriptMethodOrField  /\.\h\w\{-}[\.[:blank:]\)\(\[;|,]/hs=s+1,he=e-1,me=e-1 nextgroup=extendScriptMethodOrField,
 
 "" Namespace or Object
 syntax match   extendScriptNamespace      /\h\w\{-}\./he=e-1,me=e-1 contains=extendScriptDotNotation nextgroup=extendScriptMethodOrField
@@ -54,7 +54,7 @@ if !exists("extendscript_ignore_extendscriptdoc")
 
 	syntax region extendScriptDocComment    matchgroup=extendScriptComment start="/\*\*\s*$"  end="\*/" contains=extendScriptDocTags,extendScriptCommentTodo,extendScriptCvsTag fold
 	syntax match  extendScriptDocTags       contained "@\(param\|argument\|requires\|exception\|throws\|type\|class\|extends\|see\|example\|lends\|exports\|link\|memberOf\|member\|module\|method\|title\|name\|namespace\|optional\|default\|base\|constant\|field\|function\|file\)\>" nextgroup=extendScriptDocParam,extendScriptDocSeeTag skipwhite
-	syntax match  extendScriptDocTags       contained "@\(beta\|deprecated\|description\|fileOverview\|author\|license\|version\|returns\|return\|inner\|constructor\|private\|protected\|final\|ignore\|addon\|exec\)\>"
+	syntax match  extendScriptDocTags       contained "@\(beta\|deprecated\|description\|fileOverview\|author\|license\|version\|returns\|return\|inner\|constructor\|private\|property\|protected\|final\|ignore\|addon\|exec\|fieldOf\|methodOf\)\>"
 	syntax match  extendScriptDocParam      contained "\%(#\|\w\|\.\|:\|\/\)\+"
 	syntax region extendScriptDocSeeTag     contained matchgroup=extendScriptDocSeeTag start="{" end="}" contains=extendScriptDocTags
 	syntax case match
@@ -66,7 +66,7 @@ syntax case match
 syntax match   extendScriptSpecial        "\\\d\d\d\|\\x\x\{2\}\|\\u\x\{4\}\|\\."
 syntax region  extendScriptStringD        start=+"+  skip=+\\\\\|\\$"+  end=+"+  contains=extendScriptSpecial
 syntax region  extendScriptStringS        start=+'+  skip=+\\\\\|\\$'+  end=+'+  contains=extendScriptSpecial
-syntax region  extendScriptRegexpString   start=+/\(\*\|/\)\@!+ skip=+\\\\\|\\/+ end=+/[gim]\{,3}+ contains=extendScriptSpecial, oneline
+syntax region  extendScriptRegexpString   start=+/\(\*\|/\)\@!+ skip=+\\\\\|\\/+ end=+/[gim]\{,3}+ contains=extendScriptSpecial oneline
 syntax match   extendScriptNumber         /\<-\=\d\+L\=\>\|\<0[xX]\x\+\>/
 syntax match   extendScriptFloat          /\<-\=\%(\d\+\.\d\+\|\d\+\.\|\.\d\+\)\%([eE][+-]\=\d\+\)\=\>/
 syntax match   extendScriptLabel          /\(?\s*\)\@<!\<\w\+\(\s*:\)\@=/
