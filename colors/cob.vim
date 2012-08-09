@@ -27,7 +27,7 @@ hi Normal 		guifg=#e2e2e5 guibg=#202020 gui=none ctermfg=253 ctermbg=234
 hi NonText 		guifg=#808080 guibg=#303030 gui=none ctermfg=244 ctermbg=235
 hi LineNr 		guifg=#808080 guibg=#000000 gui=none ctermfg=244 ctermbg=232
 hi StatusLine 	guifg=#000000 guibg=#ff9800 gui=italic ctermfg=253 ctermbg=238 cterm=italic
-hi StatusLineNC guifg=#939395 guibg=#444444 gui=none ctermfg=246 ctermbg=238
+hi StatusLineNC guifg=#ff9800 guibg=#000000 gui=none ctermfg=246 ctermbg=238
 hi VertSplit 	guifg=#444499 guibg=#444444 gui=none ctermfg=238 ctermbg=238
 hi Folded 		guibg=#384048 guifg=#a0a8b0 gui=none ctermbg=4 ctermfg=248
 hi Title		guifg=#f6f3e8 guibg=NONE	gui=bold ctermfg=254 cterm=bold
@@ -52,11 +52,14 @@ hi Todo         guifg=#000000 guibg=#e6ea50 gui=italic
 
 " Code-specific colors
 hi pythonOperator guifg=#7e8aa2 gui=none ctermfg=103
-hi javaScriptNamespace guifg=#b1d631 gui=bold ctermfg=148  
+hi javaScriptNamespace guifg=#7097B3 gui=bold ctermfg=148  
 hi javaScriptThisObject guifg=#b1d631 gui=bold,italic ctermfg=148  
 hi javaScriptMethodOrField guifg=#ff5500 gui=none ctermfg=103
 hi Search     guifg=white	guibg=NONE	cterm=NONE	gui=underline
-
+hi pythonSelfObject guifg=#b1d631 gui=bold,italic ctermfg=148  
+hi pythonMethodOrField guifg=#ff5500 gui=none ctermfg=103
+hi pythonNamespace guifg=#7097B3 gui=bold ctermfg=208  
+hi pythonLogging guibg=#333333 guifg=#777777 gui=none ctermfg=244
 " Set colors for different plugins
 "
 " ShowMarks

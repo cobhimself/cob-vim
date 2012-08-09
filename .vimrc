@@ -14,15 +14,58 @@
 "     }
 "
 "     Bundle Support {
-		runtime! autoload/pathogen.vim
-		call pathogen#runtime_append_all_bundles()
-		call pathogen#helptags()
+		"runtime! autoload/pathogen.vim
+		"call pathogen#runtime_append_all_bundles()
+		"call pathogen#helptags()
 "     }
 " }
 
+"    Vundle {
+        set rtp+=~/.vim/bundle/vundle/
+        call vundle#rc()
+        let g:vundle_default_git_proto = 'git'
+
+        " let Vundle manage Vundle
+        " required! 
+        Bundle 'gmarik/vundle'
+
+        " My Bundles here:
+        "
+        " original repos on github
+        Bundle 'tpope/vim-fugitive'
+        Bundle 'tpope/vim-surround'
+        Bundle 'scrooloose/nerdcommenter'
+        Bundle 'scrooloose/nerdtree'
+        Bundle 'scrooloose/syntastic'
+        "Bundle 'checksyntax'
+        Bundle 'vim-scripts/ShowMarks'
+        Bundle 'vim-scripts/EasyMotion'
+        Bundle 'plasticboy/vim-markdown'
+        Bundle 'ervandew/supertab'
+        Bundle 'msanders/snipmate.vim'
+        Bundle 'majutsushi/tagbar'
+        Bundle 'sontek/minibufexpl.vim'
+        "Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+
+        " non github repos
+        "Bundle 'git://git.wincent.com/command-t.git'
+        " ...
+
+        filetype plugin indent on     " required!
+        "
+        " Brief help
+        " :BundleList          - list configured bundles
+        " :BundleInstall(!)    - install(update) bundles
+        " :BundleSearch(!) foo - search(or refresh cache first) for foo
+        " :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+        "
+        " see :h vundle for more details or wiki for FAQ
+        " NOTE: comments after Bundle command are not allowed..
+
+"    }
+
 " General Options {
 "
-	filetype plugin indent on  	    " Automatically detect file types.
 	scriptencoding utf-8
 	syntax on 					    " syntax highlighting
 
@@ -90,6 +133,7 @@
         set guicursor+=sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
 
         color cob     	       		    " load a colorscheme
+        let python_highlight_all=1      " Use all highlighting from python syntax
         set tabpagemax=15 				" only show 15 tabs
         set showmode                   	" display the current mode
 
@@ -108,8 +152,10 @@
             set laststatus=1           	" show statusline only if there are > 1 windows
             " Use the commented line if fugitive isn't installed
             "set statusline=%<%f\ %=\:\b%n%y%m%r%w\ %l,%c%V\ %P " a statusline, also on steroids
-            "set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
-            set statusline=%<%f\ %h%m%r%{fugitive#statusline()}[%Y,%{&ff}]\ %=[ASCII=\%03.3b]\ [HEX=\%02.2B]\ %-14.(%l,%c%V%)\ %P
+            set statusline=%b\ 0x%B
+            "set statusline=%<%t\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+            set statusline=%<%t\ %h%m%r%{fugitive#statusline()}[%Y,%{&ff}]\ %=[ASCII=\%03.3b]\ [HEX=\%02.2B]\ %-14.(%l,%c%V%)\ %P
+            "set statusline=%<%f\ %h%m%r%{fugitive#statusline()}[%Y,%{&ff}]\ %=[ASCII=\%03.3b]\ [HEX=\%02.2B]\ %-14.(%l,%c%V%)\ %P
 			"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
         endif
 
@@ -149,6 +195,7 @@
 " }
 
 " Key Mappings { "
+    let mapleader = ","
     " Turn off highlight search
     "nmap <silent> ,n :set invhls:set hls?<cr>
 
@@ -318,6 +365,19 @@
 		set tags=./tags;/,~/.vimtags
 	" }
 
+    " Tagbar {
+        vet g:tagbar_ctags_bin = '/usr/local/Cellar/ctags/5.8/bin/ctags'
+        let g:tagbar_type_extendscript = {
+            \ 'kinds' : [
+                \ 'v:global variables:0:0',
+                \ 'c:classes',
+                \ 'p:properties:0:0',
+                \ 'm:methods',
+                \ 'f:functions',
+            \ ],
+        \ }
+    " }
+
 	" AutoCloseTag {
 		" Make it so AutoCloseTag works for xml and xhtml files as well
 		au FileType xhtml,xml ru ftplugin/html/autoclosetag.vim
@@ -330,36 +390,25 @@
 		nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
 	" }
 
-    " taglist {
-        nnoremap <silent> <F3> :TlistToggle<CR>
+    " tagbar {
+        nnoremap <silent> <F3> :TagbarToggle<CR>
 
+		let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
         "Let taglist handle extendscript files as javascript
-        let tlist_extendscript_settings= 'JavaScript;c:Classes;m:Methods;p:Properties;f:Functions;v:Variables'
+        "let g:tagbar_type_extendscript= 'extendscript;c:classes;m:methods;p:properties;f:functions;v:variables'
     " }
 
-    " jslint {
-        let g:JSLintHighlightErrorLine = 0
+    " minibufexplorer {
+        "let g:miniBufExplMaxSize = <max lines: defualt 1>
+        let g:miniBufExplMapWindowNavVim = 1
+        map <Leader>b :MiniBufExplorer<cr>
+        "map <Leader>c :CMiniBufExplorer<cr>
+        "map <Leader>u :UMiniBufExplorer<cr>
+        "map <Leader>t :TMiniBufExplorer<cr>
     " }
 
-    " latex {
-        " REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
-        "filetype plugin on
-
-        " IMPORTANT: win32 users will need to have 'shellslash' set so that latex
-        " can be called correctly.
-		if has('win32') || has('win64')
-            set shellslash
-		endif
-
-        " IMPORTANT: grep will sometimes skip displaying the file name if you
-        " search in a singe file. This will confuse Latex-Suite. Set your grep
-        " program to always generate a file-name.
-        set grepprg=grep\ -nH\ $*
-
-        " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
-        " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
-        " The following changes the default filetype back to 'tex':
-        let g:tex_flavor='latex'
+    " pyDict {
+        let g:pydiction_location = '$VIMRUNTIME/dictionaries/python/complete-dict' 
     " }
 " }
 
@@ -373,6 +422,8 @@
         au GUIEnter * set fullscreen
     endif
 
+    command! -n=0 Dumbq :%s/“/"/e | :s/”/"/e | :s/’/'/e
+    
     "Load NERDTree on startup
     autocmd VimEnter * NERDTree
     autocmd VimEnter * wincmd p

@@ -155,6 +155,17 @@ if exists("python_highlight_space_errors") && python_highlight_space_errors != 0
   syn match pythonSpaceError	"\s\+$" display
 endif
 
+"Added by Collin Brooks: Self
+syntax keyword pythonSelf           self nextgroup=pythonDottedName
+
+"" Namespace or Object
+syntax match   pythonNamespace      /\h\w\{-}\./he=e-1,me=e-1 contains=pythonDot nextgroup=pythonMethodOrField
+syntax match   pythonMethodOrField  /\.\h\w\{-}[\.[:blank:]\)\(\[[:blank:]|,]/hs=s+1,he=e-1,me=e-1 nextgroup=pythonMethodOrField,
+
+"Added by Collin Brooks: Logging
+
+syn region pythonLogging  	start=+logging\.\w+ end=+$+ keepend contains=pythonEscape,pythonEscapeError,@Spell
+
 " Strings
 syn region pythonString		start=+'+ skip=+\\\\\|\\'\|\\$+ excludenl end=+'+ end=+$+ keepend contains=pythonEscape,pythonEscapeError,@Spell
 syn region pythonString		start=+"+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end=+$+ keepend contains=pythonEscape,pythonEscapeError,@Spell
@@ -308,7 +319,11 @@ if version >= 508 || !exists("did_python_syn_inits")
     command -nargs=+ HiLink hi def link <args>
   endif
 
-  HiLink pythonStatement	Statement
+  HiLink pythonSelf         pythonSelfObject
+  HiLink pythonLogging      Comment
+  HiLink pythonMethodOrField pythonMethodOrField
+  HiLink pythonNamespace    pythonNamespace
+  HiLink pythonStatement	Comment
   HiLink pythonPreCondit	Statement
   HiLink pythonFunction		Function
   HiLink pythonConditional	Conditional
@@ -318,12 +333,12 @@ if version >= 508 || !exists("did_python_syn_inits")
 
   HiLink pythonDecorator	Define
   HiLink pythonDottedName	Function
-  HiLink pythonDot          Normal
+  HiLink pythonDot          Type
 
   HiLink pythonComment		Comment
   HiLink pythonCoding		Special
-  HiLink pythonRun		Special
-  HiLink pythonTodo		Todo
+  HiLink pythonRun	    	Special
+  HiLink pythonTodo	        Todo
 
   HiLink pythonError		Error
   HiLink pythonIndentError	Error

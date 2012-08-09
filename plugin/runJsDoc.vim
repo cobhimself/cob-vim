@@ -37,7 +37,8 @@ set cpo&vim
 " ---------------------------------------------------------------------
 "  Initialization: {{{1
 let s:jsdoc_dir="$HOME/Dropbox/Applications/jsdoc-toolkit/"
-let s:jsdoc_conf=s:jsdoc_dir . "conf/BE.conf"
+"let s:jsdoc_conf=s:jsdoc_dir . "conf/COB_ISSD.conf"
+let s:jsdoc_conf=s:jsdoc_dir . "conf/testbefore.conf"
 let s:jsdoc_app=s:jsdoc_dir . "app/run.js"
 
 fun! <SID>RunJsDoc(...)

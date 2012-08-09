@@ -28,6 +28,8 @@ setlocal iskeyword+=$
 
 syntax sync fromstart
 
+syntax match extendScriptSpaceError		  "\s\+$" display
+
 syntax match extendScriptDotNotation      "\." nextgroup=extendScriptPrototype,extendScriptMethodOrField,extendScriptBracket,extendScriptParenBlock
 
 "" ExtendScript Method/Field
@@ -36,6 +38,9 @@ syntax match   extendScriptMethodOrField  /\.\h\w\{-}[\.[:blank:]\)\(\[;|,]/hs=s
 "" Namespace or Object
 syntax match   extendScriptNamespace      /\h\w\{-}\./he=e-1,me=e-1 contains=extendScriptDotNotation nextgroup=extendScriptMethodOrField
 
+"Added by Collin Brooks: logging
+
+syntax region extendScriptLogging           start=+\[outputLn(\|\$.writeln(\|\$.write(\]+ end=+$+ keepend
 
 "" JavaScript comments
 syntax keyword extendScriptCommentTodo    TODO FIXME XXX TBD contained
@@ -101,7 +106,7 @@ syn match   extendScriptOperatorSymbols	"\(==\|!=\|>=\|<=\|=\~\|!\~\|>\|<\|=\)[?
 syn match   extendScriptOperatorSymbols	"||\|&&\|[-+.]"	skipwhite
 
 "" Code blocks
-syntax cluster extendScriptAll       contains=extendScriptOperatorSymbols,extendScriptNamespace,extendScriptMethodOrField,extendScriptComment,extendScriptLineComment,extendScriptDocComment,extendScriptStringD,extendScriptStringS,extendScriptRegexpString,extendScriptNumber,extendScriptFloat,extendScriptLabel,extendScriptSource,extendScriptType,extendScriptThis,extendScriptOperator,extendScriptBoolean,extendScriptNull,extendScriptFunction,extendScriptConditional,extendScriptRepeat,extendScriptBranch,extendScriptStatement,extendScriptGlobalObjects,extendScriptExceptions,extendScriptFutureKeys,extendScriptDotNotation
+syntax cluster extendScriptAll       contains=extendScriptOperatorSymbols,extendScriptNamespace,extendScriptMethodOrField,extendScriptComment,extendScriptLineComment,extendScriptDocComment,extendScriptStringD,extendScriptStringS,extendScriptRegexpString,extendScriptNumber,extendScriptFloat,extendScriptLabel,extendScriptSource,extendScriptType,extendScriptThis,extendScriptOperator,extendScriptBoolean,extendScriptNull,extendScriptFunction,extendScriptConditional,extendScriptRepeat,extendScriptBranch,extendScriptStatement,extendScriptGlobalObjects,extendScriptExceptions,extendScriptFutureKeys,extendScriptDotNotation,extendScriptSpaceError
 syntax region  extendScriptBracket   matchgroup=extendScriptBracket transparent start="\[" end="\]" contains=@extendScriptAll,extendScriptParensErrB,extendScriptParensErrC,extendScriptBracket,extendScriptParen,extendScriptBlock,
 syntax region  extendScriptParen     matchgroup=extendScriptParen   transparent start="("  end=")"  contains=@extendScriptAll,extendScriptParensErrA,extendScriptParensErrC,extendScriptParen,extendScriptBracket,extendScriptBlock nextgroup=extendScriptMethodOrField
 syntax region  extendScriptBlock     matchgroup=extendScriptBlock   transparent start="{"  end="}"  contains=@extendScriptAll,extendScriptParensErrA,extendScriptParensErrB,extendScriptParen,extendScriptBracket,extendScriptBlock
@@ -116,7 +121,7 @@ syntax match   extendScriptParensErrC     contained "}"
 "syntax clear htmlJavaScript
 "syntax clear extendScriptExpression
 syntax cluster  htmlJavaScript contains=@extendScriptAll,extendScriptBracket,extendScriptParen,extendScriptBlock,extendScriptParenError
-syntax cluster  extendScriptExpression contains=@extendScriptAll,extendScriptBracket,extendScriptParen,extendScriptBlock,extendScriptParenError
+syntax cluster  extendScriptExpression contains=@extendScriptAll,extendScriptBracket,extendScriptParen,extendScriptBlock,extendScriptParenError,extendScriptSpaceError
 
 if main_syntax == "extendscript"
 	syntax sync clear
@@ -156,6 +161,7 @@ if version >= 508 || !exists("did_extendscript_syn_inits")
 		command -nargs=+ HiLink hi def link <args>
 	endif
 	HiLink extendScriptComment              Comment
+	HiLink extendScriptLogging              Comment
 	HiLink extendScriptLineComment          Comment
 	HiLink extendScriptDocComment           Comment
 	HiLink extendScriptCommentTodo          Todo
@@ -195,6 +201,7 @@ if version >= 508 || !exists("did_extendscript_syn_inits")
 	HiLink extendScriptSource               Special
 	HiLink extendScriptGlobalObjects        Special
 	HiLink extendScriptExceptions           Special
+	HiLink extendScriptSpaceError  			Error
 
 	delcommand HiLink
 endif

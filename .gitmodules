@@ -37,3 +37,9 @@
 [submodule "bundle/vimtodo"]
 	path = bundle/vimtodo
 	url = git://github.com/mivok/vimtodo.git
+[submodule "bundle/taglist-plus"]
+	path = bundle/taglist-plus
+	url = https://github.com/int3/vim-taglist-plus.git
+[submodule "bundle/jslint"]
+	path = bundle/jslint
+	url = git://github.com/hallettj/jslint.vim.git

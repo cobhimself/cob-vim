@@ -1,5 +1,4 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='ftp://ftp.notadaypromised.com/'
-let g:netrw_dirhist_2='ftp://ftp.notadaypromised.com/public_html/'
-let g:netrw_dirhist_3='ftp://ftp.thecoblog.com/'
+let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_1='ftp://ftp.thecoblog.com/public_html/wp/wp-content/plugins/'
+let g:netrw_dirhist_2='/Volumes/Xsan/Misc/MIKE_JOHNSON'
