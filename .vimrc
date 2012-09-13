@@ -13,11 +13,6 @@
 		endif
 "     }
 "
-"     Bundle Support {
-		"runtime! autoload/pathogen.vim
-		"call pathogen#runtime_append_all_bundles()
-		"call pathogen#helptags()
-"     }
 " }
 
 "    Vundle {
@@ -34,9 +29,12 @@
         " original repos on github
         Bundle 'tpope/vim-fugitive'
         Bundle 'tpope/vim-surround'
+        Bundle 'tpope/vim-markdown'
         Bundle 'scrooloose/nerdcommenter'
         Bundle 'scrooloose/nerdtree'
         Bundle 'scrooloose/syntastic'
+        Bundle 'ScrollColors'
+        "Bundle 'PyFlakes'
         "Bundle 'checksyntax'
         Bundle 'vim-scripts/ShowMarks'
         Bundle 'vim-scripts/EasyMotion'
@@ -44,7 +42,10 @@
         Bundle 'ervandew/supertab'
         Bundle 'msanders/snipmate.vim'
         Bundle 'majutsushi/tagbar'
-        Bundle 'sontek/minibufexpl.vim'
+        "Bundle 'sontek/minibufexpl.vim'
+        Bundle 'nvie/vim-flake8'
+        "PHP syntax
+        Bundle 'StanAngeloff/php.vim' 
         "Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 
         " non github repos
@@ -304,17 +305,24 @@
 		let g:NERDShutUp=1
     " }
 
+    " Syntastic {
+        let g:syntastic_enable_signs = 1
+        let g:syntastic_enable_highlighting = 1
+    " }
+
+    " Flake8 {
+        autocmd BufWritePost *.py call Flake8()
+    " }
+
     " NERDComment {
 		"comment out line(s) in visual mode
 		vmap  o  :call NERDComment(1, 'toggle')<CR>
     " }
 
-	" PIV {
-		let g:DisableAutoPHPFolding = 0
-	" }
-	
 	" Supertab {
+        let g:SuperTabDefaultCompletionType = "context"
 		let g:SuperTabDefaultCompletionType = "context"
+        set completeopt=menuone,longest,preview
         "let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 	" }
 
@@ -331,34 +339,34 @@
 	" }
 	
 	" OmniComplete {
-        if has("autocmd") && exists("+omnifunc")
-            autocmd Filetype *
-                \if &omnifunc == "" |
-                \setlocal omnifunc=syntaxcomplete#Complete |
-                \endif
-        endif
+        "if has("autocmd") && exists("+omnifunc")
+            "autocmd Filetype *
+                "\if &omnifunc == "" |
+                "\setlocal omnifunc=syntaxcomplete#Complete |
+                "\endif
+        "endif
 
-		" Popup menu hightLight Group
-		"highlight Pmenu 	ctermbg=13 	guibg=DarkBlue
-		highlight PmenuSel 	ctermbg=7 	guibg=DarkBlue 		guifg=LightBlue
-		"highlight PmenuSbar ctermbg=7 	guibg=DarkGray
-		"highlight PmenuThumb 			guibg=Black
+		"" Popup menu hightLight Group
+		""highlight Pmenu 	ctermbg=13 	guibg=DarkBlue
+		"highlight PmenuSel 	ctermbg=7 	guibg=DarkBlue 		guifg=LightBlue
+		""highlight PmenuSbar ctermbg=7 	guibg=DarkGray
+		""highlight PmenuThumb 			guibg=Black
 
-		hi Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
-		hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
-		hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
+		"hi Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
+		"hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
+		"hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
 
-		" some convenient mappings 
-		inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
-		inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
-		inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-		inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-		inoremap <expr> <C-d> 	   pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
-		inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
+		"" some convenient mappings 
+		"inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
+		"inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+		"inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+		"inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+		"inoremap <expr> <C-d> 	   pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
+		"inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
 
-		" automatically open and close the popup menu / preview window
-		au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-		set completeopt=menu,longest,preview
+		"" automatically open and close the popup menu / preview window
+		"au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+		"set completeopt=menu,longest,preview
 	" }
 	
 	" Ctags {
@@ -366,7 +374,7 @@
 	" }
 
     " Tagbar {
-        vet g:tagbar_ctags_bin = '/usr/local/Cellar/ctags/5.8/bin/ctags'
+        let g:tagbar_ctags_bin = '/usr/local/Cellar/ctags/5.8/bin/ctags'
         let g:tagbar_type_extendscript = {
             \ 'kinds' : [
                 \ 'v:global variables:0:0',
