@@ -46,6 +46,8 @@
         Bundle 'nvie/vim-flake8'
         "PHP syntax
         Bundle 'StanAngeloff/php.vim' 
+        Bundle 'groenewege/vim-less'
+        Bundle 'tisho/css-snippets-snipmate'
         "Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 
         " non github repos
