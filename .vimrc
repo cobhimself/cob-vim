@@ -27,28 +27,31 @@
         " My Bundles here:
         "
         " original repos on github
-        Bundle 'tpope/vim-fugitive'
-        Bundle 'tpope/vim-surround'
-        Bundle 'tpope/vim-markdown'
+		Bundle 'plasticboy/vim-markdown'
+		Bundle 'vim-scripts/Smart-Tabs'
+        Bundle 'Lokaltog/vim-powerline'
+        Bundle 'ScrollColors'
+        Bundle 'StanAngeloff/php.vim' 
+        Bundle 'ervandew/supertab'
+        Bundle 'gmarik/ide-popup.vim'
+        Bundle 'groenewege/vim-less'
+        Bundle 'kien/ctrlp.vim'
+        Bundle 'majutsushi/tagbar'
+        Bundle 'msanders/snipmate.vim'
+        Bundle 'nathanaelkane/vim-indent-guides'
+        Bundle 'nvie/vim-flake8'
+        Bundle 'othree/xml.vim'
+        Bundle 'plasticboy/vim-markdown'
         Bundle 'scrooloose/nerdcommenter'
         Bundle 'scrooloose/nerdtree'
         Bundle 'scrooloose/syntastic'
-        Bundle 'ScrollColors'
-        "Bundle 'PyFlakes'
-        "Bundle 'checksyntax'
-        Bundle 'vim-scripts/ShowMarks'
-        Bundle 'vim-scripts/EasyMotion'
-        Bundle 'plasticboy/vim-markdown'
-        Bundle 'ervandew/supertab'
-        Bundle 'msanders/snipmate.vim'
-        Bundle 'majutsushi/tagbar'
-        "Bundle 'sontek/minibufexpl.vim'
-        Bundle 'nvie/vim-flake8'
-        "PHP syntax
-        Bundle 'StanAngeloff/php.vim' 
-        Bundle 'groenewege/vim-less'
         Bundle 'tisho/css-snippets-snipmate'
-        "Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+        Bundle 'tpope/vim-fugitive'
+        Bundle 'tpope/vim-markdown'
+        Bundle 'tpope/vim-surround'
+        Bundle 'vim-scripts/EasyMotion'
+        Bundle 'vim-scripts/ShowMarks'
+        Bundle 'vim-scripts/vimwiki'
 
         " non github repos
         "Bundle 'git://git.wincent.com/command-t.git'
@@ -83,6 +86,15 @@
         set pastetoggle=<F12>          	" pastetoggle (sane indentation on pastes)
     " }
 	set background=dark             " Assume a dark background
+	" List chars
+	set listchars=""                  " Reset the listchars
+	"set listchars=tab:\ \             " a tab should display as "  ", trailing whitespace as "."
+	"set listchars+=trail:.            " show trailing spaces as dots
+	set listchars+=extends:>          " The character to show in the last column when wrap is
+									  " off and the line continues beyond the right of the screen
+	set listchars+=precedes:<         " The character to show in the last column when wrap is
+									  " off and the line continues beyond the right of the screen
+    set listchars+=tab:\|.
     set vb t_vb=""		            " I don't care about bells
     set virtualedit=all             " Turn virtual edit on
     set hidden                      " Don't need to save files to hide them
@@ -109,8 +121,8 @@
 
     set showfulltag                 " When completing by tag, show the whole tag, not just the function name
     set fillchars=""                " get rid of the silly characters in window separators
-    set expandtab                   " Turn tabs into spaces
-    
+    set noexpandtab                   " Don't turn tabs into spaces
+
     " GUI Options {
 
         " Give access to the menu items within the console
@@ -206,21 +218,21 @@
     "nmap <silent> ,w :set invwrap:set wrap?<cr>
 
     " Open NERD Tree
-    nmap <silent> ,nt :NERDTreeToggle<cr>
+    nmap <silent> <leader>nt :NERDTreeToggle<cr>
 
     " Save and reload the current file.
-    nmap <silent> ,re :w <cr>:e %<cr>
+    nmap <silent> <leader>re :w <cr>:e %<cr>
 
     " Let's make it easy to edit this file (mnemonic for the key sequence is
     " 'e'dit 'v'imrc)
-    nmap <silent> ,ev :e $MYVIMRC<cr>
+    nmap <silent> <leader>ev :e $MYVIMRC<cr>
 
     " And to source this file as well (mnemonic for the key sequence is
     " 's'ource 'v'imrc)
-    nmap <silent> ,sv :so $MYVIMRC<cr>
+    nmap <silent> <leader>sv :so $MYVIMRC<cr>
 
     " Run the command that was just yanked
-    nmap <silent> ,rc :@"<cr>
+    nmap <silent> <leader>rc :@"<cr>
 
     " allow command line editing like emacs
     cnoremap <C-A>      <Home>
@@ -236,50 +248,50 @@
     cnoremap <ESC><C-H> <C-W>
 
     " Maps to make handling windows a bit easier
-    noremap <silent> ,h :wincmd h<CR>
-    noremap <silent> ,j :wincmd j<CR>
-    noremap <silent> ,k :wincmd k<CR>
-    noremap <silent> ,l :wincmd l<CR>
-    noremap <silent> ,sb :wincmd p<CR>
+    noremap <silent> <leader>h :wincmd h<CR>
+    noremap <silent> <leader>j :wincmd j<CR>
+    noremap <silent> <leader>k :wincmd k<CR>
+    noremap <silent> <leader>l :wincmd l<CR>
+    noremap <silent> <leader>sb :wincmd p<CR>
     noremap <silent> <C-F9>  :vertical resize -10<CR>
     noremap <silent> <C-F10> :resize +10<CR>
     noremap <silent> <C-F11> :resize -10<CR>
     noremap <silent> <C-F12> :vertical resize +10<CR>
-    noremap <silent> ,bn :bn<CR>
-    noremap <silent> ,bp :bp<CR>
-    noremap <silent> ,s8 :vertical resize 83<CR>
-    noremap <silent> ,cj :wincmd j<CR>:close<CR>
-    noremap <silent> ,ck :wincmd k<CR>:close<CR>
-    noremap <silent> ,ch :wincmd h<CR>:close<CR>
-    noremap <silent> ,cl :wincmd l<CR>:close<CR>
-    noremap <silent> ,cc :close<CR>
-    noremap <silent> ,cw :cclose<CR>
-    noremap <silent> ,ml <C-W>L
-    noremap <silent> ,mk <C-W>K
-    noremap <silent> ,mh <C-W>H
-    noremap <silent> ,mj <C-W>J
+    noremap <silent> <leader>bn :bn<CR>
+    noremap <silent> <leader>bp :bp<CR>
+    noremap <silent> <leader>s8 :vertical resize 83<CR>
+    noremap <silent> <leader>cj :wincmd j<CR>:close<CR>
+    noremap <silent> <leader>ck :wincmd k<CR>:close<CR>
+    noremap <silent> <leader>ch :wincmd h<CR>:close<CR>
+    noremap <silent> <leader>cl :wincmd l<CR>:close<CR>
+    noremap <silent> <leader>cc :close<CR>
+    noremap <silent> <leader>cw :cclose<CR>
+    noremap <silent> <leader>ml <C-W>L
+    noremap <silent> <leader>mk <C-W>K
+    noremap <silent> <leader>mh <C-W>H
+    noremap <silent> <leader>mj <C-W>J
     noremap <silent> <C-7> <C-W>>
     noremap <silent> <C-8> <C-W>+
     noremap <silent> <C-9> <C-W>+
     noremap <silent> <C-0> <C-W>>
 
     " Move the current window forward (to the right) of the next window in the row
-    nmap <silent> ,mf <C-W>r
+    nmap <silent> <leader>mf <C-W>r
 
     " Move the current window backwards (to the left) of the next window in the row
-    nmap <silent> ,mb <C-W>R
+    nmap <silent> <leader>mb <C-W>R
 
     " Search the current file for what's currently in the search
     " register and display matches
-    nmap <silent> ,gs
+    nmap <silent> <leader>gs
          \ :vimgrep /<C-r>// %<CR>:ccl<CR>:cwin<CR><C-W>J:set nohls<CR>
 
     " Search the current file for the word under the cursor and display matches
-    nmap <silent> ,gw
+    nmap <silent> <leader>gw
          \ :vimgrep /<C-r><C-w>/ %<CR>:ccl<CR>:cwin<CR><C-W>J:set nohls<CR>
 
     " Search the current file for the WORD under the cursor and display matches
-    nmap <silent> ,gW
+    nmap <silent> <leader>gW
          \ :vimgrep /<C-r><C-a>/ %<CR>:ccl<CR>:cwin<CR><C-W>J:set nohls<CR>
 
     " The following beast is something i didn't write... it will return the
@@ -300,7 +312,37 @@
 
 " Plugins {
 
+    " closeTag {
+      "autocmd FileType html,htmldjango,jinjahtml,eruby,mako let b:closetag_html_style=1
+      "autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,eruby,mako source ~/.vim/bundle/closetag/plugin/closetag.vim
+    " }
+    "
+    " vimwiki {
+        let g:vimwiki_html_header_numbering = 2 " Number the headers
+        let wiki_cob = {}
+        let wiki_cob.path = '~/Dropbox/cob_wiki/'
+        let wiki_cob.html_template = ''
+        let wiki_cob.ext = '.md'
+        let wiki_cob.syntax: 'markdown'
+        let wiki_cob.nested_syntaxes = {
+          \ 'xml': 'xml',
+          \ 'javascript': 'javascript',
+          \ 'html': 'html',
+          \ 'python': 'python'
+        \ }
+
+        hi VimwikiHeader1 guifg=#ff5500 gui=bold
+        hi VimwikiHeader2 guifg=#b1d631 gui=bold
+        hi VimwikiHeader3 guifg=#7097B3 gui=bold
+        hi VimwikiHeader4 guifg=#ff9800
+        hi VimwikiHeader5 guifg=#b1d631
+        hi VimwikiHeader6 guifg=#7e8aa2
+
+        let g:vimwiki_list = [wiki_cob]
+    " }
+
     " NERDTree {
+        let NERDTreeMinimalUI = 1       "No need to show UI labels
         let NERDTreeShowBookmarks = 1
         let NERDTreeChDirMode = 2       "Change the CWD when root changes
         let NERDTreeHijackNetrw = 1     "Hijack Netrw
@@ -323,7 +365,6 @@
 
 	" Supertab {
         let g:SuperTabDefaultCompletionType = "context"
-		let g:SuperTabDefaultCompletionType = "context"
         set completeopt=menuone,longest,preview
         "let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 	" }
@@ -371,12 +412,16 @@
 		"set completeopt=menu,longest,preview
 	" }
 	
-	" Ctags {
-		set tags=./tags;/,~/.vimtags
-	" }
-
     " Tagbar {
+        " Ctags {
+          set tags=./tags;/,~/.vimtags/
+        " }
         let g:tagbar_ctags_bin = '/usr/local/Cellar/ctags/5.8/bin/ctags'
+        nnoremap <silent> <C-SPACE> :TagbarToggle<CR>
+        let g:tagbar_autofocus = 1
+        let g:tagbar_compact = 1    "Don't show help at the top.
+        let g:tagbar_autoshowtag = 1
+        let g:tagbar_autoclose = 1
         let g:tagbar_type_extendscript = {
             \ 'kinds' : [
                 \ 'v:global variables:0:0',
@@ -397,7 +442,7 @@
 		" Setting the author var
 		let g:snips_author = 'Collin D. Brooks <collin.brooks@gmail.com>'
 		" Shortcut for reloading snippets, useful when developing
-		nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
+		nnoremap <leader>smr <esc>:exec ReloadAllSnippets()<cr>
 	" }
 
     " tagbar {
@@ -420,6 +465,17 @@
     " pyDict {
         let g:pydiction_location = '$VIMRUNTIME/dictionaries/python/complete-dict' 
     " }
+
+    " indent-guides {
+        let g:indent_guides_color_change_percent = 2
+        let g:indent_guides_enable_on_vim_startup = 0
+        let g:indent_guides_guide_size = 0
+        let g:indent_guides_start_level = 2
+    " }
+
+    " Ctrlp {
+    let g:ctrlp_show_hidden = 1
+    " }
 " }
 
 " Custom Functions {
@@ -433,7 +489,7 @@
     endif
 
     command! -n=0 Dumbq :%s/“/"/e | :s/”/"/e | :s/’/'/e
-    
+
     "Load NERDTree on startup
     autocmd VimEnter * NERDTree
     autocmd VimEnter * wincmd p

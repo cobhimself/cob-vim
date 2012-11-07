@@ -1,3 +1,60 @@
+[submodule "bundle/ScrollColors"]
+    path = bundle/ScrollColors
+    url = git://github.com/vim-scripts/ScrollColors.git
+[submodule "bundle/Smart-Tabs"]
+    path = bundle/Smart-Tabs
+    url = git://github.com/vim-scripts/Smart-Tabs.git
+[submodule "bundle/EasyMotion"]
+    path = bundle/EasyMotion
+    url = git://github.com/vim-scripts/EasyMotion.git
+[submodule "bundle/ctrlp.vim"]
+    path = bundle/ctrlp.vim
+    url = git://github.com/kien/ctrlp.vim.git
+[submodule "bundle/ide-popup.vim"]
+    path = bundle/ide-popup.vim
+    url = git://github.com/gmarik/ide-popup.git
+[submodule "bundle/php.vim"]
+    path = bundle/php.vim
+    url = git://github.com/StanAngeloff/php.vim.git
+[submodule "bundle/tagbar"]
+    path = bundle/tagbar
+    url = git://github.com/majutsushi/tagbar.git
+[submodule "bundle/vim-indent-guides"]
+    path = bundle/vim-indent-guides
+    url = git://github.com/nathanaelkane/vim-indent-guides.git
+[submodule "bundle/vim-powerline"]
+    path = bundle/vim-powerline
+    url = git://github.com/Lokaltog/vim-powerline.git
+[submodule "bundle/vimwiki"]
+    path = bundle/vimwiki
+    url = git://github.com/vim-scripts/vimwiki.git
+[submodule "bundle/xml.vim"]
+    path = bundle/xml.vim
+    url = git://github.com/othree/xml.vim.git
+[submodule "bundle/css-snippets-snipmate"]
+    path = bundle/css-snippets-snipmate
+    url = git://github.com/tisho/css-snippets-snipmate.git
+[submodule "bundle/minibufexpl.vim"]
+    path = bundle/minibufexpl.vim
+    url = git://github.com/fholgado/minibufexpl.vim.git
+[submodule "bundle/snipmate.vim"]
+    path = bundle/snipmate.vim
+    url = git://github.com/msanders/snipmate.vim.git
+[submodule "bundle/syntastic"]
+    path = bundle/syntastic
+    url = git://github.com/scrooloose/syntastic.git
+[submodule "bundle/vim-flake8"]
+    path = bundle/vim-flake8
+    url = git://github.com/nvie/vim-flake8.git
+[submodule "bundle/vim-fugitive"]
+    path = bundle/vim-fugitive
+    url = git://github.com/tpope/vim-fugitive.git
+[submodule "bundle/vim-less"]
+    path = bundle/vim-less
+    url = git://github.com/groenewege/vim-less.git
+[submodule "bundle/vundle"]
+    path = bundle/vundle
+    url = git://github.com/gmarik/vundle.git
 [submodule "bundle/snipmate"]
 	path = bundle/snipmate
 	url = git://github.com/msanders/snipmate.vim.git
