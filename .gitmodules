@@ -19,6 +19,9 @@
 [submodule "bundle/tagbar"]
     path = bundle/tagbar
     url = git://github.com/majutsushi/tagbar.git
+[submodule "bundle/vim-buffergator"]
+    path = bundle/vim-buffergator
+    url = git://github.com/jeetsukumaran/vim-buffergator.git
 [submodule "bundle/vim-indent-guides"]
     path = bundle/vim-indent-guides
     url = git://github.com/nathanaelkane/vim-indent-guides.git
