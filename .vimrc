@@ -35,6 +35,7 @@
         Bundle 'ervandew/supertab'
         Bundle 'gmarik/ide-popup.vim'
         Bundle 'groenewege/vim-less'
+        Bundle 'jeetsukumaran/vim-buffergator'
         Bundle 'kien/ctrlp.vim'
         Bundle 'majutsushi/tagbar'
         Bundle 'msanders/snipmate.vim'
@@ -52,7 +53,6 @@
         Bundle 'vim-scripts/EasyMotion'
         Bundle 'vim-scripts/ShowMarks'
         Bundle 'vim-scripts/vimwiki'
-        Bundle 'jeetsukumaran/vim-buffergator'
 
         " non github repos
         "Bundle 'git://git.wincent.com/command-t.git'
