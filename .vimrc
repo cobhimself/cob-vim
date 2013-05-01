@@ -6,11 +6,11 @@
 "     }
 
 "     Windows Compatibility {
-		" On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
-		" across (heterogeneous) systems easier. 
-		if has('win32') || has('win64')
-		  set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-		endif
+        " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
+        " across (heterogeneous) systems easier. 
+        if has('win32') || has('win64')
+          set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+        endif
 "     }
 "
 " }
@@ -27,11 +27,11 @@
         " My Bundles here:
         "
         " original repos on github
-		Bundle 'plasticboy/vim-markdown'
-		Bundle 'vim-scripts/Smart-Tabs'
+        Bundle 'plasticboy/vim-markdown'
+        Bundle 'vim-scripts/Smart-Tabs'
         Bundle 'Lokaltog/vim-powerline'
         Bundle 'ScrollColors'
-        Bundle 'StanAngeloff/php.vim' 
+        "Bundle 'StanAngeloff/php.vim' 
         Bundle 'ervandew/supertab'
         Bundle 'gmarik/ide-popup.vim'
         Bundle 'groenewege/vim-less'
@@ -51,12 +51,16 @@
         Bundle 'tpope/vim-markdown'
         Bundle 'tpope/vim-surround'
         Bundle 'vim-scripts/EasyMotion'
-        Bundle 'vim-scripts/ShowMarks'
+        "Bundle 'vim-scripts/ShowMarks'
         Bundle 'vim-scripts/vimwiki'
-
-        " non github repos
-        "Bundle 'git://git.wincent.com/command-t.git'
-        " ...
+        Bundle 'spf13/PIV'
+        Bundle 'altercation/vim-colors-solarized'
+        "Bundle 'vim-scripts/php-doc-upgrade'
+        "Bundle 'klokane/vim-phpunit'
+        Bundle 'joonty/vim-phpqa.git'
+        Bundle 'mattn/zencoding-vim'
+        "Bundle 'Raimondi/delimitMate'
+        
 
         filetype plugin indent on     " required!
         "
@@ -73,8 +77,8 @@
 
 " General Options {
 "
-	scriptencoding utf-8
-	syntax on 					    " syntax highlighting
+    scriptencoding utf-8
+    syntax on 					    " syntax highlighting
 
     " Formatting {
         set nowrap                     	" wrap long lines
@@ -86,15 +90,15 @@
         set formatoptions=tcroql        " For automatic formatting.
         set pastetoggle=<F12>          	" pastetoggle (sane indentation on pastes)
     " }
-	set background=dark             " Assume a dark background
-	" List chars
-	set listchars=""                  " Reset the listchars
-	"set listchars=tab:\ \             " a tab should display as "  ", trailing whitespace as "."
-	"set listchars+=trail:.            " show trailing spaces as dots
-	set listchars+=extends:>          " The character to show in the last column when wrap is
-									  " off and the line continues beyond the right of the screen
-	set listchars+=precedes:<         " The character to show in the last column when wrap is
-									  " off and the line continues beyond the right of the screen
+    set background=dark             " Assume a dark background
+    " List chars
+    set listchars=""                  " Reset the listchars
+    "set listchars=tab:\ \             " a tab should display as "  ", trailing whitespace as "."
+    "set listchars+=trail:.            " show trailing spaces as dots
+    set listchars+=extends:>          " The character to show in the last column when wrap is
+                                      " off and the line continues beyond the right of the screen
+    set listchars+=precedes:<         " The character to show in the last column when wrap is
+                                      " off and the line continues beyond the right of the screen
     set listchars+=tab:\|\ 
     set vb t_vb=""		            " I don't care about bells
     set virtualedit=all             " Turn virtual edit on
@@ -110,11 +114,11 @@
     set smartcase                   " Set the search to scan so it ignores case when the search is all lowercase but recognizes uppercase if it's specified.                      
     set shellslash                  " set the forward slash to be the slash to use
     set backspace=2                 " Allow backspacing over indent, eol, and the start of an insert
-	set autowrite                   " automatically write a file when leaving a modified buffer
-	set shortmess+=filmnrxoOtT     	" abbrev. of messages (avoids 'hit enter')
-	set viewoptions=folds,options,cursor,unix,slash " better unix / windows compatibility
-	set history=1000  				" Store a ton of history (default is 20)
-	set nospell    	 	        	" spell checking on
+    set autowrite                   " automatically write a file when leaving a modified buffer
+    set shortmess+=filmnrxoOtT     	" abbrev. of messages (avoids 'hit enter')
+    set viewoptions=folds,options,cursor,unix,slash " better unix / windows compatibility
+    set history=1000  				" Store a ton of history (default is 20)
+    set nospell    	 	        	" spell checking on
     
     " When the page starts to scroll, keep the cursor 8 lines from the top and 8
     " lines from the bottom
@@ -122,40 +126,19 @@
 
     set showfulltag                 " When completing by tag, show the whole tag, not just the function name
     set fillchars=""                " get rid of the silly characters in window separators
-    set noexpandtab                   " Don't turn tabs into spaces
+    "set noexpandtab                   " Don't turn tabs into spaces
 
-    " GUI Options {
-
-        " Give access to the menu items within the console
-        so $VIMRUNTIME/menu.vim
-        set cpo-=<
-        set wcm=<C-Z>
-        map <C-CR> :emenu <C-Z>
-
-        set mouse=a					    " automatically enable mouse usage
-
-        " Setup the general guioptions
-        set guioptions+=c               " Don't show gui popups, put them in the console.
-        set guioptions-=r               " No right hand scrollbar.
-        set guioptions-=l               " No left hand scrollbar.
-        set guioptions-=b               " No bottom hand scrollbar.
-
-        " Set up the gui cursor to look nice
-        set guicursor=n-v-c:block-Cursor-blinkon0
-        set guicursor+=ve:ver35-Cursor
-        set guicursor+=o:hor50-Cursor
-        set guicursor+=i-ci:ver25-Cursor
-        set guicursor+=r-cr:hor20-Cursor
-        set guicursor+=sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
-
-        color cob     	       		    " load a colorscheme
+    " Visual Options {
+    
+        color solarized        		    " load a colorscheme
+        "color cob     	       		    " load a colorscheme
         let python_highlight_all=1      " Use all highlighting from python syntax
         set tabpagemax=15 				" only show 15 tabs
         set showmode                   	" display the current mode
 
         set cursorline  				" highlight current line
-        hi cursorline guibg=#333333 	" highlight bg color of current line
-        hi CursorColumn guibg=#333333   " highlight cursor
+        "hi cursorline guibg=#333333 	" highlight bg color of current line
+        "hi CursorColumn guibg=#333333   " highlight cursor
 
         if has('cmdline_info')
             set ruler                  	" show the ruler
@@ -172,7 +155,7 @@
             "set statusline=%<%t\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
             set statusline=%<%t\ %h%m%r%{fugitive#statusline()}[%Y,%{&ff}]\ %=[ASCII=\%03.3b]\ [HEX=\%02.2B]\ %-14.(%l,%c%V%)\ %P
             "set statusline=%<%f\ %h%m%r%{fugitive#statusline()}[%Y,%{&ff}]\ %=[ASCII=\%03.3b]\ [HEX=\%02.2B]\ %-14.(%l,%c%V%)\ %P
-			"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+            "set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
         endif
 
         set backspace=indent,eol,start 	" backspace for dummys
@@ -195,17 +178,17 @@
 
     " Folder Locations {
     "
-		set backup 						" backups are nice ...
-		set backupdir=$HOME/.vimbackup//  " but not when they clog .
-		set directory=$HOME/.vimswap// 	" Same for swap files
-		set viewdir=$HOME/.vimviews// 	" same for view files
-		
-		"" Creating directories if they don't exist
-		silent execute '!mkdir -p $HOME/.vimbackup'
-		silent execute '!mkdir -p $HOME/.vimswap'
-		silent execute '!mkdir -p $HOME/.vimviews'
-		au BufWinLeave * silent! mkview  "make vim save view (state) (folds, cursor, etc)
-		au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, etc)
+        set backup 						" backups are nice ...
+        set backupdir=$HOME/.vimbackup//  " but not when they clog .
+        set directory=$HOME/.vimswap// 	" Same for swap files
+        set viewdir=$HOME/.vimviews// 	" same for view files
+        
+        "" Creating directories if they don't exist
+        silent execute '!mkdir -p $HOME/.vimbackup'
+        silent execute '!mkdir -p $HOME/.vimswap'
+        silent execute '!mkdir -p $HOME/.vimviews'
+        au BufWinLeave * silent! mkview  "make vim save view (state) (folds, cursor, etc)
+        au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, etc)
     " }
 
 " }
@@ -234,6 +217,10 @@
 
     " Run the command that was just yanked
     nmap <silent> <leader>rc :@"<cr>
+
+    " Underline the current line with '='
+    nmap <silent> <leader>ul yypVr=
+
 
     " allow command line editing like emacs
     cnoremap <C-A>      <Home>
@@ -277,107 +264,58 @@
     noremap <silent> <C-0> <C-W>>
     noremap <silent> <leader>tt <C-W>T
 
-    if has("gui_macvim") && has("gui_running")
-			" Map command-[ and command-] to indenting or outdenting
-			" while keeping the original selection in visual mode
-			vmap <D-]> >gv
-			vmap <D-[> <gv
+    " Map command-[ and command-] to indenting or outdenting
+    " while keeping the original selection in visual mode
+    vmap <A-]> >gv
+    vmap <A-[> <gv
 
-			nmap <D-]> >>
-			nmap <D-[> <<
+    nmap <A-]> >>
+    nmap <A-[> <<
 
-			omap <D-]> >>
-			omap <D-[> <<
+    omap <A-]> >>
+    omap <A-[> <<
 
-			imap <D-]> <Esc>>>i
-			imap <D-[> <Esc><<i
+    imap <A-]> <Esc>>>i
+    imap <A-[> <Esc><<i
+ 
+    " Bubble single lines
+    nmap <C-Up> [e
+    nmap <C-Down> ]e
+    nmap <C-k> [e
+    nmap <C-j> ]e
 
-			" Bubble single lines
-			nmap <D-Up> [e
-			nmap <D-Down> ]e
-			nmap <D-k> [e
-			nmap <D-j> ]e
+    " Bubble multiple lines
+    vmap <C-Up> [egv
+    vmap <C-Down> ]egv
+    vmap <C-k> [egv
+    vmap <C-j> ]egv
 
-			" Bubble multiple lines
-			vmap <D-Up> [egv
-			vmap <D-Down> ]egv
-			vmap <D-k> [egv
-			vmap <D-j> ]egv
+    " Make shift-insert work like in Xterm
+    map <S-Insert> <MiddleMouse>
+    map! <S-Insert> <MiddleMouse>
 
-			" Map Command-# to switch tabs
-			map  <D-0> 0gt
-			imap <D-0> <Esc>0gt
-			map  <D-1> 1gt
-			imap <D-1> <Esc>1gt
-			map  <D-2> 2gt
-			imap <D-2> <Esc>2gt
-			map  <D-3> 3gt
-			imap <D-3> <Esc>3gt
-			map  <D-4> 4gt
-			imap <D-4> <Esc>4gt
-			map  <D-5> 5gt
-			imap <D-5> <Esc>5gt
-			map  <D-6> 6gt
-			imap <D-6> <Esc>6gt
-			map  <D-7> 7gt
-			imap <D-7> <Esc>7gt
-			map  <D-8> 8gt
-			imap <D-8> <Esc>8gt
-			map  <D-9> 9gt
-			imap <D-9> <Esc>9gt
-		else
-			" Map command-[ and command-] to indenting or outdenting
-			" while keeping the original selection in visual mode
-			vmap <A-]> >gv
-			vmap <A-[> <gv
+    " Map Control-# to switch tabs
+    map  <C-0> 0gt
+    imap <C-0> <Esc>0gt
+    map  <C-1> 1gt
+    imap <C-1> <Esc>1gt
+    map  <C-2> 2gt
+    imap <C-2> <Esc>2gt
+    map  <C-3> 3gt
+    imap <C-3> <Esc>3gt
+    map  <C-4> 4gt
+    imap <C-4> <Esc>4gt
+    map  <C-5> 5gt
+    imap <C-5> <Esc>5gt
+    map  <C-6> 6gt
+    imap <C-6> <Esc>6gt
+    map  <C-7> 7gt
+    imap <C-7> <Esc>7gt
+    map  <C-8> 8gt
+    imap <C-8> <Esc>8gt
+    map  <C-9> 9gt
+    imap <C-9> <Esc>9gt
 
-			nmap <A-]> >>
-			nmap <A-[> <<
-
-			omap <A-]> >>
-			omap <A-[> <<
-
-			imap <A-]> <Esc>>>i
-			imap <A-[> <Esc><<i
-		 
-			" Bubble single lines
-			nmap <C-Up> [e
-			nmap <C-Down> ]e
-			nmap <C-k> [e
-			nmap <C-j> ]e
-
-			" Bubble multiple lines
-			vmap <C-Up> [egv
-			vmap <C-Down> ]egv
-			vmap <C-k> [egv
-			vmap <C-j> ]egv
-
-			" Make shift-insert work like in Xterm
-			map <S-Insert> <MiddleMouse>
-			map! <S-Insert> <MiddleMouse>
-
-			" Map Control-# to switch tabs
-			map  <C-0> 0gt
-			imap <C-0> <Esc>0gt
-			map  <C-1> 1gt
-			imap <C-1> <Esc>1gt
-			map  <C-2> 2gt
-			imap <C-2> <Esc>2gt
-			map  <C-3> 3gt
-			imap <C-3> <Esc>3gt
-			map  <C-4> 4gt
-			imap <C-4> <Esc>4gt
-			map  <C-5> 5gt
-			imap <C-5> <Esc>5gt
-			map  <C-6> 6gt
-			imap <C-6> <Esc>6gt
-			map  <C-7> 7gt
-			imap <C-7> <Esc>7gt
-			map  <C-8> 8gt
-			imap <C-8> <Esc>8gt
-			map  <C-9> 9gt
-			imap <C-9> <Esc>9gt
-		endif
     " Move the current window forward (to the right) of the next window in the row
     nmap <silent> <leader>mf <C-W>r
 
@@ -406,11 +344,14 @@
          \ . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")
          \ . ">"<CR>
 
-	" Change Working Directory to that of the current file
+    " Change Working Directory to that of the current file
     cmap cwd lcd %:p:h
 
-	" For when you forget to sudo.. Really Write the file.
-	cmap w!! w !sudo tee % >/dev/null
+    " For when you forget to sudo.. Really Write the file.
+    cmap w!! w !sudo tee % >/dev/null
+    
+    " Map F1 to esc so pressing F1 doesn't open up help
+    imap <F1> <esc>
 " }
 
 " Plugins {
@@ -449,7 +390,7 @@
         let NERDTreeShowBookmarks = 1
         let NERDTreeChDirMode = 2       "Change the CWD when root changes
         let NERDTreeHijackNetrw = 1     "Hijack Netrw
-		let g:NERDShutUp=1
+        let g:NERDShutUp=1
     " }
 
     " Syntastic {
@@ -462,29 +403,29 @@
     " }
 
     " NERDComment {
-		"comment out line(s) in visual mode
-		vmap  o  :call NERDComment(1, 'toggle')<CR>
+        "comment out line(s) in visual mode
+        vmap  o  :call NERDComment(1, 'toggle')<CR>
     " }
 
-	" Supertab {
+    " Supertab {
         let g:SuperTabDefaultCompletionType = "context"
         set completeopt=menuone,longest,preview
         "let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
-	" }
+    " }
 
-	" Misc { 
-		let g:checksyntax_auto = 0
-		let b:match_ignorecase = 1
-	" }
+    " Misc { 
+        let g:checksyntax_auto = 0
+        let b:match_ignorecase = 1
+    " }
 
-	" ShowMarks {
-		let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-		" Don't leave on by default, use :ShowMarksOn to enable
-		let g:showmarks_enable = 0
+    " ShowMarks {
+        let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        " Don't leave on by default, use :ShowMarksOn to enable
+        let g:showmarks_enable = 0
         map <silent> <F2> :ShowMarksToggle<CR>
-	" }
-	
-	" OmniComplete {
+    " }
+    
+    " OmniComplete {
         "if has("autocmd") && exists("+omnifunc")
             "autocmd Filetype *
                 "\if &omnifunc == "" |
@@ -492,29 +433,29 @@
                 "\endif
         "endif
 
-		"" Popup menu hightLight Group
-		""highlight Pmenu 	ctermbg=13 	guibg=DarkBlue
-		"highlight PmenuSel 	ctermbg=7 	guibg=DarkBlue 		guifg=LightBlue
-		""highlight PmenuSbar ctermbg=7 	guibg=DarkGray
-		""highlight PmenuThumb 			guibg=Black
+        "" Popup menu hightLight Group
+        ""highlight Pmenu 	ctermbg=13 	guibg=DarkBlue
+        "highlight PmenuSel 	ctermbg=7 	guibg=DarkBlue 		guifg=LightBlue
+        ""highlight PmenuSbar ctermbg=7 	guibg=DarkGray
+        ""highlight PmenuThumb 			guibg=Black
 
-		"hi Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
-		"hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
-		"hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
+        "hi Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
+        "hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
+        "hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
 
-		"" some convenient mappings 
-		"inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
-		"inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
-		"inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-		"inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-		"inoremap <expr> <C-d> 	   pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
-		"inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
+        "" some convenient mappings 
+        "inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
+        "inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+        "inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+        "inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+        "inoremap <expr> <C-d> 	   pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
+        "inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
 
-		"" automatically open and close the popup menu / preview window
-		"au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-		"set completeopt=menu,longest,preview
-	" }
-	
+        "" automatically open and close the popup menu / preview window
+        "au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+        "set completeopt=menu,longest,preview
+    " }
+    
     " Tagbar {
         " Ctags {
           set tags=./tags;/,~/.vimtags/
@@ -536,33 +477,24 @@
         \ }
     " }
 
-	" AutoCloseTag {
-		" Make it so AutoCloseTag works for xml and xhtml files as well
-		au FileType xhtml,xml ru ftplugin/html/autoclosetag.vim
-	" }
-
-	" SnipMate {
-		" Setting the author var
-		let g:snips_author = 'Collin D. Brooks <collin.brooks@gmail.com>'
-		" Shortcut for reloading snippets, useful when developing
-		nnoremap <leader>smr <esc>:exec ReloadAllSnippets()<cr>
-	" }
-
-    " tagbar {
-        nnoremap <silent> <F3> :TagbarToggle<CR>
-
-		let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
-        "Let taglist handle extendscript files as javascript
-        "let g:tagbar_type_extendscript= 'extendscript;c:classes;m:methods;p:properties;f:functions;v:variables'
+    " AutoCloseTag {
+        " Make it so AutoCloseTag works for xml and xhtml files as well
+        au FileType xhtml,xml ru ftplugin/html/autoclosetag.vim
     " }
 
-    " minibufexplorer {
-        "let g:miniBufExplMaxSize = <max lines: defualt 1>
-        let g:miniBufExplMapWindowNavVim = 1
-        map <Leader>b :MiniBufExplorer<cr>
-        "map <Leader>c :CMiniBufExplorer<cr>
-        "map <Leader>u :UMiniBufExplorer<cr>
-        "map <Leader>t :TMiniBufExplorer<cr>
+    " SnipMate {
+        " Setting the author var
+        let g:snips_author = 'Collin D. Brooks <collin.brooks@gmail.com>'
+        " Shortcut for reloading snippets, useful when developing
+        nnoremap <leader>smr <esc>:exec ReloadAllSnippets()<cr>
+    " }
+
+    " tagbar {
+        "nnoremap <silent> <leader>,tb :TagbarToggle<CR>
+
+        "let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+        "Let taglist handle extendscript files as javascript
+        "let g:tagbar_type_extendscript= 'extendscript;c:classes;m:methods;p:properties;f:functions;v:variables'
     " }
 
     " pyDict {
@@ -585,21 +517,46 @@
     let g:Powerline_stl_path_style = 'relative'
     " }
     
+    " PHPQA {
+        let g:phpqa_messdetector_ruleset="~/Dropbox/dotfiles/.vim/phpqa/phpmd_rulesets/magento/magento-ruleset.xml"
+
+        " Set the codesniffer args (default = "--standard=PHPCS")
+        let g:phpqa_codesniffer_args = "--standard=Mage -n"
+
+        " Don't run messdetector on save (default = 1)
+        let g:phpqa_messdetector_autorun = 1
+
+        " Don't run codesniffer on save (default = 1)
+        let g:phpqa_codesniffer_autorun = 1
+
+        " Show code coverage on load (default = 0)
+        let g:phpqa_codecoverage_autorun = 1
+    " }
+
+    " BufferGator {
+
+        let g:buffergator_split_size = 20
+        let g:buffergator_viewport_split_policy = "B"
+        let g:buffergator_autoexpand_on_split = 0
+    " }
+
+    " spf13/PIV {
+    let g:pdv_cfg_Type = "mixed"
+    let g:pdv_cfg_Package = "Webdav"
+    let g:pdv_cfg_Version = "//autogen//"
+    let g:pdv_cfg_Author = ""
+    let g:pdv_cfg_Copyright = "Copyright (c) 2012 Elevate All rights reserved."
+    let g:pdv_cfg_License = "PHP Version 5.3 {@link http://www.php.net/license/5_3.txt}"
+    let g:PIVAutoClose = 1
+    let g:PIVPearStyle = 1
+    let g:DisableAutoPHPFolding = 1
+    " }
+
 " }
 
 " Custom Functions {
 " }
 
 " Startup Settings {
-    " Auto Full Screen Mode
-    if has("gui_running")
-        set fuoptions=maxvert,maxhorz
-        au GUIEnter * set fullscreen
-    endif
-
     command! -n=0 Dumbq :%s/“/"/e | :s/”/"/e | :s/’/'/e
-
-    "Load NERDTree on startup
-    autocmd VimEnter * NERDTree
-    autocmd VimEnter * wincmd p
 " }
