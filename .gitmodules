@@ -109,3 +109,6 @@
 [submodule "phpqa/phpmd_rulesets/magento"]
 	path = phpqa/phpmd_rulesets/magento
 	url = https://github.com/cobhimself/phpmd-magento-ruleset.git
+[submodule "bundle/ide-popup.vim"]
+	path = bundle/ide-popup.vim
+	url = git://github.com/gmarik/ide-popup.vim.git
