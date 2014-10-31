@@ -16,62 +16,67 @@
 " }
 
 "    Vundle {
-        set rtp+=~/.vim/bundle/vundle/
-        call vundle#rc()
+        filetype off 
+		set rtp+=~/.vim/bundle/Vundle.vim
+		call vundle#begin()
         let g:vundle_default_git_proto = 'git'
 
         " let Vundle manage Vundle
         " required! 
-        Bundle 'gmarik/vundle'
+        Plugin 'gmarik/Vundle.vim'
 
-        " My Bundles here:
+        " My Plugins here:
         "
         " original repos on github
-        Bundle 'plasticboy/vim-markdown'
-        Bundle 'vim-scripts/Smart-Tabs'
-        Bundle 'Lokaltog/vim-powerline'
-        Bundle 'ScrollColors'
-        "Bundle 'StanAngeloff/php.vim' 
-        Bundle 'ervandew/supertab'
-        Bundle 'gmarik/ide-popup.vim'
-        Bundle 'groenewege/vim-less'
-        Bundle 'jeetsukumaran/vim-buffergator'
-        Bundle 'kien/ctrlp.vim'
-        Bundle 'majutsushi/tagbar'
-        Bundle 'msanders/snipmate.vim'
-        Bundle 'nathanaelkane/vim-indent-guides'
-        Bundle 'nvie/vim-flake8'
-        Bundle 'othree/xml.vim'
-        Bundle 'plasticboy/vim-markdown'
-        Bundle 'scrooloose/nerdcommenter'
-        Bundle 'scrooloose/nerdtree'
-        Bundle 'scrooloose/syntastic'
-        Bundle 'tisho/css-snippets-snipmate'
-        Bundle 'tpope/vim-fugitive'
-        Bundle 'tpope/vim-markdown'
-        Bundle 'tpope/vim-surround'
-        Bundle 'vim-scripts/EasyMotion'
-        "Bundle 'vim-scripts/ShowMarks'
-        Bundle 'vim-scripts/vimwiki'
-        Bundle 'spf13/PIV'
-        Bundle 'altercation/vim-colors-solarized'
-        "Bundle 'vim-scripts/php-doc-upgrade'
-        "Bundle 'klokane/vim-phpunit'
-        Bundle 'joonty/vim-phpqa.git'
-        Bundle 'mattn/zencoding-vim'
-        "Bundle 'Raimondi/delimitMate'
+        "Plugin 'plasticboy/vim-markdown'
+        Plugin 'vim-scripts/Smart-Tabs'
+        Plugin 'Lokaltog/vim-powerline'
+        Plugin 'ScrollColors'
+        "Plugin 'StanAngeloff/php.vim' 
+        Plugin 'ervandew/supertab'
+        Plugin 'gmarik/ide-popup.vim'
+        Plugin 'groenewege/vim-less'
+        Plugin 'jeetsukumaran/vim-buffergator'
+        Plugin 'kien/ctrlp.vim'
+        Plugin 'majutsushi/tagbar'
+        Plugin 'msanders/snipmate.vim'
+        Plugin 'nathanaelkane/vim-indent-guides'
+        Plugin 'nvie/vim-flake8'
+        Plugin 'othree/xml.vim'
+        Plugin 'plasticboy/vim-markdown'
+        Plugin 'scrooloose/nerdcommenter'
+        Plugin 'scrooloose/nerdtree'
+        Plugin 'scrooloose/syntastic'
+        Plugin 'tisho/css-snippets-snipmate'
+        Plugin 'tpope/vim-fugitive'
+        "Plugin 'tpope/vim-markdown'
+        Plugin 'tpope/vim-surround'
+        Plugin 'vim-scripts/EasyMotion'
+        "Plugin 'vim-scripts/ShowMarks'
+        Plugin 'vim-scripts/vimwiki'
+        Plugin 'spf13/PIV'
+        Plugin 'altercation/vim-colors-solarized'
+        "Plugin 'vim-scripts/php-doc-upgrade'
+        "Plugin 'klokane/vim-phpunit'
+        Plugin 'joonty/vim-phpqa.git'
+        Plugin 'mattn/emmet-vim'
+        "Plugin 'Raimondi/delimitMate'
         
+		" All of your Plugins must be added before the following line
+		call vundle#end()            " required
+		filetype plugin indent on    " required
 
-        filetype plugin indent on     " required!
-        "
-        " Brief help
-        " :BundleList          - list configured bundles
-        " :BundleInstall(!)    - install(update) bundles
-        " :BundleSearch(!) foo - search(or refresh cache first) for foo
-        " :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
-        "
-        " see :h vundle for more details or wiki for FAQ
-        " NOTE: comments after Bundle command are not allowed..
+		" Brief help
+		" " :PluginList       - lists configured plugins
+		" " :PluginInstall    - installs plugins; append `!` to update or just
+		" :PluginUpdate
+		" " :PluginSearch foo - searches for foo; append `!` to refresh local
+		" cache
+		" " :PluginClean      - confirms removal of unused plugins; append `!`
+		" to auto-approve removal
+		" "
+		" " see :h vundle for more details or wiki for FAQ
+		" " Put your non-Plugin stuff after this line
 
 "    }
 
@@ -362,27 +367,27 @@
     " }
     "
     " vimwiki {
-        let g:vimwiki_html_header_numbering = 2 " Number the headers
-        let wiki_cob = {}
-        let wiki_cob.path = '~/Dropbox/cob_wiki/'
-        let wiki_cob.html_template = ''
-        let wiki_cob.ext = '.md'
-        let wiki_cob.syntax: 'markdown'
-        let wiki_cob.nested_syntaxes = {
-          \ 'xml': 'xml',
-          \ 'javascript': 'javascript',
-          \ 'html': 'html',
-          \ 'python': 'python'
-        \ }
+        "let g:vimwiki_html_header_numbering = 2 " Number the headers
+        "let wiki_cob = {}
+        "let wiki_cob.path = '~/Dropbox/cob_wiki/'
+        "let wiki_cob.html_template = ''
+        "let wiki_cob.ext = '.md'
+        "let wiki_cob.syntax: 'markdown'
+        "let wiki_cob.nested_syntaxes = {
+          "\ 'xml': 'xml',
+          "\ 'javascript': 'javascript',
+          "\ 'html': 'html',
+          "\ 'python': 'python'
+        "\ }
 
-        hi VimwikiHeader1 guifg=#ff5500 gui=bold
-        hi VimwikiHeader2 guifg=#b1d631 gui=bold
-        hi VimwikiHeader3 guifg=#7097B3 gui=bold
-        hi VimwikiHeader4 guifg=#ff9800
-        hi VimwikiHeader5 guifg=#b1d631
-        hi VimwikiHeader6 guifg=#7e8aa2
+        "hi VimwikiHeader1 guifg=#ff5500 gui=bold
+        "hi VimwikiHeader2 guifg=#b1d631 gui=bold
+        "hi VimwikiHeader3 guifg=#7097B3 gui=bold
+        "hi VimwikiHeader4 guifg=#ff9800
+        "hi VimwikiHeader5 guifg=#b1d631
+        "hi VimwikiHeader6 guifg=#7e8aa2
 
-        let g:vimwiki_list = [wiki_cob]
+        "let g:vimwiki_list = [wiki_cob]
     " }
 
     " NERDTree {
