@@ -52,9 +52,9 @@
 [submodule "bundle/vim-less"]
     path = bundle/vim-less
     url = git://github.com/groenewege/vim-less.git
-[submodule "bundle/vundle"]
-    path = bundle/vundle
-    url = git://github.com/gmarik/vundle.git
+[submodule "bundle/Vundle.vim"]
+    path = bundle/Vundle.vim
+    url = git://github.com/gmarik/Vundle.vim.git
 [submodule "bundle/snipmate"]
 	path = bundle/snipmate
 	url = git://github.com/msanders/snipmate.vim.git
