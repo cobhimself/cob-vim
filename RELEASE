@@ -1,3 +1,8 @@
+= Version 1.3 =
+
+ - Add ide-popup.vim to submodules
+ - Update vundle in gitmodules
+
 = Version 1.2 =
 
  - Remove Zen-coding bundle
