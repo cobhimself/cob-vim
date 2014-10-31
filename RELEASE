@@ -1,3 +1,9 @@
+= Version 1.2 =
+
+ -  Switch to emmet-vim instead of zen-coding
+ -  Install bundles again.
+ -  Remove vundle plugins so they can be reinstalled.
+
 = Version 1.1 =
 
  - Update syntastic, tagbar, vim-buffergator and vim-less
