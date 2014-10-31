@@ -59,7 +59,7 @@
         "Plugin 'vim-scripts/php-doc-upgrade'
         "Plugin 'klokane/vim-phpunit'
         Plugin 'joonty/vim-phpqa.git'
-        Plugin 'mattn/zencoding-vim'
+        Plugin 'mattn/emmet-vim'
         "Plugin 'Raimondi/delimitMate'
         
 		" All of your Plugins must be added before the following line
